@@ -1,0 +1,59 @@
+F:\VS22\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe.config
+F:\VS22\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe
+F:\VS22\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.pdb
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.AssemblyReference.cache
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.SuggestedBindingRedirects.cache
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Properties.Resources.resources
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.GenerateResource.cache
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.CoreCompileInputs.cache
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.exe
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.pdb
+F:\VS22\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.Login.resources
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe.config
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.pdb
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.AssemblyReference.cache
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.Login.resources
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Properties.Resources.resources
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.GenerateResource.cache
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.CoreCompileInputs.cache
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.exe
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.pdb
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.HomePage.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe.config
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.exe
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Pedagoška sveska.pdb
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.AssemblyReference.cache
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.SuggestedBindingRedirects.cache
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.HomePage.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.Login.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Properties.Resources.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.GenerateResource.cache
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.CoreCompileInputs.cache
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.exe
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.pdb
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.PrikazUser.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.PrikazAdmin.resources
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.PrikazAdmin.resources
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška_sveska.Forme.PrikazUser.resources
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\MySql.Data.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\obj\Debug\Pedagoška sveska.csproj.CopyComplete
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\MySql.Data.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Eco.Handles.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Eco.Interfaces.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Eco.LinqExtender.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Eco.WPF.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\MDriven.Net.Http.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\WECPOFLogic.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\WPFViewModelExternalControls.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\System.Buffers.dll
+F:\VS22\Maturski rad\Maturski-rad\Maturski rad\Pedagoška sveska\bin\Debug\Newtonsoft.Json.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Eco.Handles.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Eco.Interfaces.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Eco.LinqExtender.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Eco.WPF.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\MDriven.Net.Http.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\WECPOFLogic.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\WPFViewModelExternalControls.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\System.Buffers.dll
+C:\Users\adjurekovic\Desktop\Visual Studio\Maturski\Maturski rad\Pedagoška sveska\bin\Debug\Newtonsoft.Json.dll
