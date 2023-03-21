@@ -16,11 +16,11 @@ namespace Pedagoška_sveska.Forme
     {
         private Panel panel = new Panel();
         private Label Label = new Label();
-        private Label LabelUsername = new Label();
-        private TextBox Username = new TextBox();
-        private Label LabelPassword = new Label();
-        private TextBox Password = new TextBox();
         private Button btnEnter = new Button();
+        private TextBox Username = new TextBox();
+        private TextBox Password = new TextBox();
+        private Label LabelPassword = new Label();
+        private Label LabelUsername = new Label();
 
         public Login()
         {
@@ -31,100 +31,94 @@ namespace Pedagoška_sveska.Forme
             //
             //  Forma
             //
-            ClientSize = new Size(500,500);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            StartPosition = FormStartPosition.CenterScreen;
             MaximizeBox = false;
             MinimizeBox = false;
             Click += Evrithing_Click;
+            ClientSize = new Size(500,500);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            StartPosition = FormStartPosition.CenterScreen;
 
             //
             //  panel
             //
-            panel.Location = new Point(125, 75);
-            panel.Size = new Size(250, 340);
             panel.Click += Evrithing_Click;
+            panel.Size = new Size(250, 340);
+            panel.Location = new Point(125, 75);
             Controls.Add(panel);
 
             //
             //  Label
             //
             Label.Text = "Login";
-            Label.Location = new Point(0, 0);
-            Label.TextAlign = ContentAlignment.MiddleCenter;
-            Label.Size = new Size((int)panel.Width, 60);
             Label.ForeColor = Color.Black;
-            Label.Font = new Font("Times New Roman", 40F, FontStyle.Regular);
             Label.Click += Evrithing_Click;
+            Label.Location = new Point(0, 0);
+            Label.Size = new Size((int)panel.Width, 60);
+            Label.TextAlign = ContentAlignment.MiddleCenter;
+            Label.Font = new Font("Times New Roman", 40F, FontStyle.Regular);
             panel.Controls.Add(Label);
 
             //
             //  LabelUsername
             //
             LabelUsername.Text = "Username";
-            LabelUsername.Location = new Point(0, 60);
-            LabelUsername.TextAlign = ContentAlignment.MiddleCenter;
-            LabelUsername.Size = new Size((int)panel.Width, 60);
             LabelUsername.ForeColor = Color.Black;
-            LabelUsername.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             LabelUsername.Click += Evrithing_Click;
+            LabelUsername.Location = new Point(0, 60);
+            LabelUsername.Size = new Size((int)panel.Width, 60);
+            LabelUsername.TextAlign = ContentAlignment.MiddleCenter;
+            LabelUsername.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(LabelUsername);
 
             //
             //  Username
             //
-            Username.Location = new Point(39, 120);
-            Username.Size = new Size(172, 60);
-            Username.MaxLength = 12;
-            Username.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
+            Username.MaxLength = 20;
+            Username.Click += Username_Click;
             Username.ForeColor = Color.Black;
-            Username.TabIndex = 1;
+            Username.Size = new Size(172, 60);
+            Username.Location = new Point(39, 120);
             if (Username.Text == "")
             {
                 Username.Text = "Unesite ime";
                 Username.ForeColor = Color.LightGray;
             }
-            Username.Click += Username_Click;
+            Username.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(Username);
 
             //
             //  LabelPassword
             //
             LabelPassword.Text = "Password";
-            LabelPassword.Location = new Point(0, 170);
-            LabelPassword.TextAlign = ContentAlignment.MiddleCenter;
-            LabelPassword.Size = new Size((int)panel.Width, 60);
             LabelPassword.ForeColor = Color.Black;
-            LabelPassword.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             LabelPassword.Click += Evrithing_Click;
+            LabelPassword.Location = new Point(0, 170);
+            LabelPassword.Size = new Size((int)panel.Width, 60);
+            LabelPassword.TextAlign = ContentAlignment.MiddleCenter;
+            LabelPassword.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(LabelPassword);
 
             //
             //  Password
             //
-            Password.Location = new Point(39, 230);
-            Password.Size = new Size(172, 60);
-            Password.ForeColor = Color.Black;
             Password.MaxLength = 12;
-            Password.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
-            if (Password.Text == "")
-            {
-                Password.Text = "Unesite šifru";
-                Password.ForeColor = Color.LightGray;
-            }
+            Password.PasswordChar = '*';
+            Password.ForeColor = Color.Black;
             Password.Click += Password_Click;
+            Password.Size = new Size(172, 60);
+            Password.Location = new Point(39, 230);
+            Password.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(Password);
 
             //
             //  Enter
             //
-            btnEnter.TabIndex = 0;
             btnEnter.Text = "Login";
-            btnEnter.Location = new Point(75, 290);
-            btnEnter.Size = new Size(100, 40);
             btnEnter.ForeColor = Color.Black;
-            btnEnter.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             btnEnter.Click += BtnEnter_Click;
+            btnEnter.Size = new Size(100, 40);
+            btnEnter.Location = new Point(75, 290);
+            btnEnter.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(btnEnter);
         }
 
@@ -211,17 +205,10 @@ namespace Pedagoška_sveska.Forme
         }
         private void Password_Click(object sender, EventArgs e)
         {
-            if (Password.Text == "Unesite šifru")
-            {
-                Password.Text = "";
-                Password.ForeColor = Color.Black;
-            }
             if (Username.Text == "")
             {
                 Username.Text = "Unesite ime";
                 Username.ForeColor = Color.LightGray;
-                panel.Focus();
-                return;
             }
         }
 
@@ -234,13 +221,6 @@ namespace Pedagoška_sveska.Forme
                 panel.Focus();
                 return;
             }
-            if (Password.Text == "")
-            {
-                Password.Text = "Unesite šifru";
-                Password.ForeColor = Color.LightGray;
-                panel.Focus();
-                return;
-            }
         }
 
         private void Username_Click(object sender, EventArgs e)
@@ -249,13 +229,6 @@ namespace Pedagoška_sveska.Forme
             {
                 Username.Text = "";
                 Username.ForeColor = Color.Black;
-            }
-            if (Password.Text == "")
-            {
-                Password.Text = "Unesite šifru";
-                Password.ForeColor = Color.LightGray;
-                panel.Focus();
-                return;
             }
         }
     }

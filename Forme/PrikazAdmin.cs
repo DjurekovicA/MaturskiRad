@@ -41,6 +41,11 @@ namespace Pedagoška_sveska.Forme
         private ListBox lbUceniciOcene = new ListBox();
         private ListBox lbUceniciAktivnost = new ListBox();
 
+        private DataGridView dgvOceneIzabran = new DataGridView();
+        /*private DataGridView dgvOceneIzabran1 = new DataGridView();
+        private DataGridView dgvOceneIzabran2 = new DataGridView();
+        private DataGridView dgvOceneIzabran3 = new DataGridView();*/
+
         string ucenik = "";
         string prikaz = "";
         int panel = 0;

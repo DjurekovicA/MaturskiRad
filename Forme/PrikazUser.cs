@@ -15,20 +15,20 @@ namespace Pedagoška_sveska.Forme
     public partial class PrikazUser : Form
     {
         private Label lblIme = new Label();
-        private Button btnClose = new Button();
-        private ListBox lbPredmetiO = new ListBox();
-        private ListBox lbPredmetiA = new ListBox();
-
         private Panel pnlOcene = new Panel();
+        private Button btnClose = new Button();
         private Panel pnlAktivnost = new Panel();
+        private DataGridView dgvOcene = new DataGridView();
+        private DataGridView dgvAktivnost = new DataGridView();
 
-        string predmet = "";
+
         string prikaz = "";
+        string predmet = "";
         string korisnik = "";
         public PrikazUser(string Predmet, string Prikaz, string Korisnik)
         {
-            predmet = Predmet;
             prikaz = Prikaz;
+            predmet = Predmet;
             korisnik = Korisnik;
             Dizajn();
             LoadData();
@@ -42,7 +42,7 @@ namespace Pedagoška_sveska.Forme
             //  
             //  Forma
             //
-            ClientSize = new Size(350, 370);
+            ClientSize = new Size(470, 370);
             FormBorderStyle = FormBorderStyle.None;
             BackColor = Color.FromArgb(241, 242, 243);
             StartPosition = FormStartPosition.CenterScreen;
@@ -62,27 +62,46 @@ namespace Pedagoška_sveska.Forme
             btnClose.Text = "X";
             btnClose.Size = new Size(30, 30);
             btnClose.Click += BtnClose_Click;
-            btnClose.Location = new Point(310, 10);
+            btnClose.Location = new Point(ClientSize.Width - btnClose.Width - 10, 10);
             btnClose.Font = new Font("Times New Roman", 10F, FontStyle.Regular);
             Controls.Add(btnClose);
 
             //
-            //  lbPredmetiA  
+            //  dgvAktivnost  
             //
-            lbPredmetiA.BorderStyle = BorderStyle.None;
-            lbPredmetiA.BackColor = Color.FromArgb(241, 242, 243);
-            lbPredmetiA.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbPredmetiA.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
-            pnlAktivnost.Controls.Add(lbPredmetiA);
+            dgvAktivnost.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvAktivnost.ColumnCount = 3;
+            dgvAktivnost.Columns[0].Width = 200;
+            dgvAktivnost.Columns[1].Width = 90;
+            dgvAktivnost.Columns[2].Width = 99;
+            dgvAktivnost.Size = new Size(460, 250);
+            dgvAktivnost.Columns[0].Name = "Predmet";
+            dgvAktivnost.Columns[1].Name = "Aktivnost";
+            dgvAktivnost.Columns[2].Name = "Datum";
+            dgvAktivnost.BorderStyle = BorderStyle.None;
+            dgvAktivnost.AutoResizeColumnHeadersHeight();
+            dgvAktivnost.BackColor = Color.FromArgb(241, 242, 243);
+            dgvAktivnost.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            dgvAktivnost.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
+            pnlAktivnost.Controls.Add(dgvAktivnost);
 
             //
-            //  lbPredmetiO
+            //  dgvOcene
             //
-            lbPredmetiO.BorderStyle = BorderStyle.None;
-            lbPredmetiO.BackColor = Color.FromArgb(241, 242, 243);
-            lbPredmetiO.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbPredmetiO.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
-            pnlOcene.Controls.Add(lbPredmetiO);
+            dgvOcene.ColumnCount = 3;
+            dgvOcene.Columns[0].Width = 200;
+            dgvOcene.Columns[1].Width = 89;
+            dgvOcene.Columns[2].Width = 100;
+            dgvOcene.Size = new Size(460, 250);
+            dgvOcene.Columns[0].Name = "Predmet";
+            dgvOcene.Columns[1].Name = "Ocene";
+            dgvOcene.Columns[2].Name = "Datum";
+            dgvOcene.BorderStyle = BorderStyle.None;
+            dgvOcene.AutoResizeColumnHeadersHeight();
+            dgvOcene.BackColor = Color.FromArgb(241, 242, 243);
+            dgvOcene.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            dgvOcene.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
+            pnlOcene.Controls.Add(dgvOcene);
 
             //
             //  pnlOcene
@@ -92,9 +111,9 @@ namespace Pedagoška_sveska.Forme
                 pnlAktivnost.Visible = false;
                 pnlOcene.Visible = true;
             }
+            pnlOcene.AutoScroll = true;
             pnlOcene.Location = new Point(20, 50);
             pnlOcene.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
-            pnlOcene.AutoScroll = true;
             Controls.Add(pnlOcene);
 
             //
@@ -104,9 +123,9 @@ namespace Pedagoška_sveska.Forme
                 pnlOcene.Visible = false;
                 pnlAktivnost.Visible = true;
             }
+            pnlAktivnost.AutoScroll = true;
             pnlAktivnost.Location = new Point(20, 50);
             pnlAktivnost.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
-            pnlAktivnost.AutoScroll = true;
             Controls.Add(pnlAktivnost);
         }
 
@@ -127,7 +146,7 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
-                        lbPredmetiO.Items.Add(reader.GetString("Predmet") + "   " + reader.GetString("Ocena") + "   " + reader.GetString("Datum"));
+                        dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
 
                     reader.Close();
                     dataBase.Close_db();
@@ -144,7 +163,7 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
-                        lbPredmetiA.Items.Add(reader.GetString("Predmet") + "   '" + reader.GetString("Aktivnost") + "'   " + reader.GetString("Datum"));
+                        dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
 
                     reader.Close();
                     dataBase.Close_db();
@@ -164,7 +183,7 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
-                        lbPredmetiO.Items.Add(reader.GetString("Ocena") + "   " + reader.GetString("Datum"));
+                        dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
 
                     reader.Close();
                     dataBase.Close_db();
@@ -181,7 +200,7 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
-                        lbPredmetiA.Items.Add("'" + reader.GetString("Aktivnost") + "'   " + reader.GetString("Datum"));
+                        dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
 
                     reader.Close();
                     dataBase.Close_db();
