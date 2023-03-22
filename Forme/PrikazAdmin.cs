@@ -42,9 +42,9 @@ namespace Pedagoška_sveska.Forme
         private ListBox lbUceniciAktivnost = new ListBox();
 
         private DataGridView dgvOceneIzabran = new DataGridView();
-        /*private DataGridView dgvOceneIzabran1 = new DataGridView();
+        private DataGridView dgvOceneIzabran1 = new DataGridView();
         private DataGridView dgvOceneIzabran2 = new DataGridView();
-        private DataGridView dgvOceneIzabran3 = new DataGridView();*/
+        private DataGridView dgvOceneIzabran3 = new DataGridView();
 
         string ucenik = "";
         string prikaz = "";
@@ -109,9 +109,10 @@ namespace Pedagoška_sveska.Forme
             //  lblDatum
             //
             lblDatum.TextAlign = ContentAlignment.MiddleCenter;
-            lblDatum.Size = new Size(btnPlus.Width * 2 + 10, 20);
-            lblDatum.Location = new Point(232, 225 + btnKalendar.Height);
+            lblDatum.Size = new Size(btnPlus.Width * 2 - 20, 20);
+            lblDatum.Location = new Point(252, 225 + btnKalendar.Height);
             lblDatum.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            lblDatum.SendToBack();
             Controls.Add(lblDatum);
 
             //
@@ -268,13 +269,18 @@ namespace Pedagoška_sveska.Forme
             //
             //  lbOceneIzabran
             //
-            lbOceneIzabran.BackColor = Color.White;
-            lbOceneIzabran.Location = new Point(10, 10);
-            lbOceneIzabran.BorderStyle = BorderStyle.None;
-            lbOceneIzabran.BackColor = Color.FromArgb(241, 242, 243);
-            lbOceneIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbOceneIzabran.Size = new Size(pnlOcene.Width / 2 - 20, pnlOcene.Height - 20);
-            pnlOceneIzabran.Controls.Add(lbOceneIzabran);
+            dgvOceneIzabran.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvOceneIzabran.ColumnCount = 2;
+            dgvOceneIzabran.Columns[0].Width = 80;
+            dgvOceneIzabran.Columns[1].Width = 98;
+            dgvOceneIzabran.Columns[0].Name = "Ocena";
+            dgvOceneIzabran.Columns[1].Name = "Datum";
+            dgvOceneIzabran.BackColor = Color.White;
+            dgvOceneIzabran.Location = new Point(10, 10);
+            dgvOceneIzabran.BorderStyle = BorderStyle.None;
+            dgvOceneIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            dgvOceneIzabran.Size = new Size(pnlOcene.Width / 2 + 24, pnlOcene.Height - 20);
+            pnlOceneIzabran.Controls.Add(dgvOceneIzabran);
 
             //
             //  lbAktivnostIzabran
@@ -429,7 +435,7 @@ namespace Pedagoška_sveska.Forme
                 adapter.Fill(dt);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
-                    lbOceneIzabran.Items.Add(reader.GetString("Ocena") + " - " + reader.GetString("Datum"));
+                    dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
                 reader.Close();
                 dataBase.Close_db();
             }
@@ -500,7 +506,7 @@ namespace Pedagoška_sveska.Forme
                     cmd.CommandText = query;
                     adapter.Fill(dt);
                     dataBase.Close_db();
-                    lbOceneIzabran.Items.Clear();
+                    dgvOceneIzabran.Rows.Clear();
                     loadData();
                 }
             }
