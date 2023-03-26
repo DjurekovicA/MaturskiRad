@@ -15,11 +15,19 @@ namespace Pedagoška_sveska.Forme
 {
     public partial class PrikazAdmin : Form
     {
-        private Panel pnlOcene = new Panel();
-        private Panel pnlAktivnost = new Panel();
+        private Panel pnlUpisOcene = new Panel();
+        private Panel pnlPregledOcene = new Panel();
+        private Panel pnlUpisAktivnost = new Panel();
+        private Panel pnlPregledAktivnost = new Panel();
+
+        private Panel pnlUpisOceneIzabran = new Panel();
+        private Panel pnlPregledOceneIzabran = new Panel();
+        private Panel pnlUpisAktivnostIzabran = new Panel();
+        private Panel pnlPregledAktivnostIzabran = new Panel();
+
         private Panel pnlOceneIzabran = new Panel();
         private Panel pnlAktivnostIzabran = new Panel();
-
+       
         private Label lblIme = new Label();
         public Label lblDatum = new Label();
         public Label lblAktivnost = new Label();
@@ -36,23 +44,23 @@ namespace Pedagoška_sveska.Forme
         private ComboBox cbOcene = new ComboBox();
         private ComboBox cbOceneIzabran = new ComboBox();
 
-        private ListBox lbOceneIzabran = new ListBox();
-        private ListBox lbAktivnostIzabran = new ListBox();
         private ListBox lbUceniciOcene = new ListBox();
         private ListBox lbUceniciAktivnost = new ListBox();
 
+        private DataGridView dgvOcene = new DataGridView();
+        private DataGridView dgvAktivnost = new DataGridView();
         private DataGridView dgvOceneIzabran = new DataGridView();
-        private DataGridView dgvOceneIzabran1 = new DataGridView();
-        private DataGridView dgvOceneIzabran2 = new DataGridView();
-        private DataGridView dgvOceneIzabran3 = new DataGridView();
+        private DataGridView dgvAktivnostIzabran = new DataGridView();
 
         string ucenik = "";
         string prikaz = "";
         int panel = 0;
         string predmet = "";
-        string znak = "";
-        public PrikazAdmin(string Ucenik, string Prikaz, string Predmet)
+        string Znak = "";
+        string upisPregled = "";
+        public PrikazAdmin(string Ucenik, string Prikaz, string Predmet, string UpisPregled)
         {
+            upisPregled = UpisPregled;
             predmet = Predmet;
             ucenik = Ucenik;
             prikaz = Prikaz;
@@ -65,10 +73,15 @@ namespace Pedagoška_sveska.Forme
         }
         private void Dizajn()
         {
-            pnlOcene.Visible = false;
-            pnlAktivnost.Visible = false;
-            pnlOceneIzabran.Visible = false;
-            pnlAktivnostIzabran.Visible = false;
+            pnlUpisOcene.Visible = false;
+            pnlUpisAktivnost.Visible = false;
+            pnlUpisOceneIzabran.Visible = false;
+            pnlUpisAktivnostIzabran.Visible = false;
+            pnlPregledOcene.Visible = false;
+            pnlPregledAktivnost.Visible = false;
+            pnlPregledOceneIzabran.Visible = false;
+            pnlPregledAktivnostIzabran.Visible = false;
+
             //  
             //  Forma
             //
@@ -116,123 +129,143 @@ namespace Pedagoška_sveska.Forme
             Controls.Add(lblDatum);
 
             //
-            //  lblAktivnost
+            //  pnlUpisOcene
             //
-            lblAktivnost.Text = "Plusevi: - Minusevi: -";
-            lblAktivnost.TextAlign = ContentAlignment.MiddleCenter;
-            lblAktivnost.Size = new Size(btnPlus.Width * 2 + 10, 50);
-            lblAktivnost.Location = new Point(pnlAktivnost.Width, 45);
-            lblAktivnost.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            pnlAktivnost.Controls.Add(lblAktivnost);
+            {
+                pnlDizajn(pnlUpisOcene);
+                Controls.Add(pnlUpisOcene);
+
+                //
+                //  cbOcene
+                //
+                cbOcenaDizajn(cbOcene);
+                pnlUpisOcene.Controls.Add(cbOcene);
+
+            }
 
             //
-            //  lblAktivnostIzabran
+            //  pnlUpisOceneIzabran
             //
-            lblAktivnostIzabran.TextAlign = ContentAlignment.MiddleCenter;
-            lblAktivnostIzabran.Size = new Size(btnPlus.Width * 2 + 10, 50);
-            lblAktivnostIzabran.Location = new Point(pnlAktivnostIzabran.Width, 45);
-            lblAktivnostIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            pnlAktivnostIzabran.Controls.Add(lblAktivnostIzabran);
+            {
+                pnlDizajn(pnlUpisOceneIzabran);
+                Controls.Add(pnlUpisOceneIzabran);
+
+                //
+                //  cbOceneIzabran
+                //
+                cbOcenaDizajn(cbOceneIzabran);
+                pnlUpisOceneIzabran.Controls.Add(cbOceneIzabran);
+
+                //
+                //  dgvOceneIzabran
+                //
+                dgvAktivnostDizajn(dgvOceneIzabran);
+                dgvOceneIzabran.Columns[0].Name = "Ocena";
+                dgvOceneIzabran.Columns[1].Name = "Datum";
+                pnlUpisOceneIzabran.Controls.Add(dgvOceneIzabran);
+            }
 
             //
-            //  pnlOcene
+            //  pnlUpisAktivnost
             //
-            pnlOcene.Click += Deselect_Click;
-            pnlOcene.Location = new Point(30, 50);
-            pnlOcene.Size = new Size(ClientSize.Width - 60, ClientSize.Height - 95);
-            Controls.Add(pnlOcene);
+            {
+                pnlDizajn(pnlUpisAktivnost);
+                Controls.Add(pnlUpisAktivnost);
+
+                //
+                //  lblAktivnost
+                //
+                lblAktivnostDizajn(lblAktivnost);
+                pnlUpisAktivnost.Controls.Add(lblAktivnost);
+
+                //
+                //  lbUceniciAktivnost
+                //
+                lbUceniciAktivnostDizajn(lbUceniciAktivnost);
+                lbUceniciAktivnost.Click += LbUceniciAktivnost_Click;
+                lbUceniciAktivnost.BackColor = Color.Red;
+                pnlUpisAktivnost.Controls.Add(lbUceniciAktivnost);
+
+                //
+                //  btnPlus
+                //
+                btnAktivnostDizajn(btnPlus, "+");
+                pnlUpisAktivnost.Controls.Add(btnPlus);
+
+                //
+                //  btnMinus
+                //
+                btnAktivnostDizajn(btnMinus, "-");
+                pnlUpisAktivnost.Controls.Add(btnMinus);
+            }
 
             //
-            //   pnlOceneIzabran
+            //  pnlUpisAktivnostIzabran
             //
-            pnlOceneIzabran.Location = new Point(30, 50);
-            pnlOceneIzabran.Size = new Size(ClientSize.Width - 60, ClientSize.Height - 95);
-            Controls.Add(pnlOceneIzabran);
+            {
+                pnlDizajn(pnlUpisAktivnostIzabran);
+                Controls.Add(pnlUpisAktivnostIzabran);
+
+                //
+                //  dgvAktivnost
+                //
+                dgvAktivnostDizajn(dgvAktivnostIzabran);
+                dgvAktivnostIzabran.Columns[0].Name = "Aktivnost";
+                dgvAktivnostIzabran.Columns[1].Name = "Datum";
+                pnlUpisAktivnostIzabran.Controls.Add(dgvAktivnostIzabran);
+
+                //
+                //  lblAktivnostIzabran
+                //
+                lblAktivnostDizajn(lblAktivnostIzabran);
+                pnlUpisAktivnostIzabran.Controls.Add(lblAktivnostIzabran);
+
+                //
+                //  btnPlusIzabran
+                //
+                btnAktivnostDizajn(btnPlusIzabran, "+");
+                pnlUpisAktivnostIzabran.Controls.Add(btnPlusIzabran);
+
+                //
+                //  btnMinusIzabran
+                //
+                btnAktivnostDizajn(btnMinusIzabran, "-");
+                pnlUpisAktivnostIzabran.Controls.Add(btnMinusIzabran);
+            }
 
             //
-            //   pnlAktivnost
+            //  pnlPregledOcene
             //
-            pnlAktivnost.Click += Deselect_Click;
-            pnlAktivnost.Location = new Point(30, 50);
-            pnlAktivnost.Size = new Size(ClientSize.Width - 60, ClientSize.Height - 95);
-            Controls.Add(pnlAktivnost);
+            {
+                pnlDizajn(pnlPregledOcene);
+                Controls.Add(pnlPregledOcene);
+            }
 
             //
-            //   pnlAktivnostIzabran
+            //  pnlPregledOceneIzabran
             //
-            pnlAktivnostIzabran.Enabled = true;
-            pnlAktivnostIzabran.Location = new Point(30, 50);
-            pnlAktivnostIzabran.Size = new Size(ClientSize.Width - 60, ClientSize.Height - 95);
-            Controls.Add(pnlAktivnostIzabran);
+            {
+                pnlDizajn(pnlPregledOceneIzabran);
+                Controls.Add(pnlPregledOceneIzabran);
+            }
 
             //
-            //  btnPlus
+            //  pnlPregledAktivnost
             //
-            btnPlus.Text = "+";
-            btnPlus.AutoSize = true;
-            btnPlus.Click += BtnPlus_Click;
-            btnPlus.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            btnPlus.Location = new Point((5 * pnlAktivnost.Width / 8) - (btnPlus.Width / 2 + 5), pnlAktivnost.Height / 2);
-            pnlAktivnost.Controls.Add(btnPlus);
+            {
+                pnlDizajn(pnlPregledAktivnost);
+                Controls.Add(pnlPregledAktivnost);
+
+            }
 
             //
-            //  btnPlusIzabran
+            //  pnlPregledAktivnostIzabran
             //
-            btnPlusIzabran.Text = "+";
-            btnPlusIzabran.AutoSize = true;
-            btnPlusIzabran.Click += BtnPlus_Click;
-            btnPlusIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            btnPlusIzabran.Location = new Point((5 * pnlAktivnostIzabran.Width / 8) - (btnPlusIzabran.Width / 2 + 5), pnlAktivnostIzabran.Height / 2);
-            pnlAktivnostIzabran.Controls.Add(btnPlusIzabran);
+            {
+                pnlDizajn(pnlPregledAktivnostIzabran);
+                Controls.Add(pnlPregledAktivnostIzabran);
 
-            //
-            //  btnMinus
-            //
-            btnMinus.Text = "-";
-            btnMinus.AutoSize = true;
-            btnMinus.Click += BtnMinus_Click;
-            btnMinus.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            btnMinus.Location = new Point((5 * pnlAktivnost.Width / 8) + 5 + btnMinus.Width / 2, pnlAktivnost.Height / 2);
-            pnlAktivnost.Controls.Add(btnMinus);
-
-            //
-            //  btnMinusIzabran
-            //
-            btnMinusIzabran.Text = "-";
-            btnMinusIzabran.AutoSize = true;
-            btnMinusIzabran.Click += BtnMinus_Click;
-            btnMinusIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            btnMinusIzabran.Location = new Point((5 * pnlAktivnostIzabran.Width / 8) + 5 + btnMinusIzabran.Width / 2, pnlAktivnostIzabran.Height / 2);
-            pnlAktivnostIzabran.Controls.Add(btnMinusIzabran);
-
-            //
-            //  cbOcene
-            //
-            cbOcene.Text = "Izaberite ocenu";
-            cbOcene.Items.Add("Izaberite ocenu");
-            cbOcene.Items.Add("1");
-            cbOcene.Items.Add("2");
-            cbOcene.Items.Add("3");
-            cbOcene.Items.Add("4");
-            cbOcene.Items.Add("5");
-            cbOcene.Font = new Font("Times New Roman", 12F, FontStyle.Regular);
-            cbOcene.Location = new Point((5 * pnlAktivnostIzabran.Width / 8) - (btnPlusIzabran.Width / 8 + 5), pnlOcene.Height / 2 - cbOcene.Height);
-            pnlOcene.Controls.Add(cbOcene);
-
-            //
-            //  cbOcene
-            //
-            cbOceneIzabran.Text = "Izaberite ocenu";
-            cbOceneIzabran.Items.Add("Izaberite ocenu");
-            cbOceneIzabran.Items.Add("1");
-            cbOceneIzabran.Items.Add("2");
-            cbOceneIzabran.Items.Add("3");
-            cbOceneIzabran.Items.Add("4");
-            cbOceneIzabran.Items.Add("5");
-            cbOceneIzabran.Font = new Font("Times New Roman", 12F, FontStyle.Regular);
-            cbOceneIzabran.Location = new Point((5 * pnlAktivnostIzabran.Width / 8) - (btnPlusIzabran.Width / 8 + 5), pnlOcene.Height / 2 - cbOceneIzabran.Height);
-            pnlOceneIzabran.Controls.Add(cbOceneIzabran);
-
+            }
             //
             //  btnAdd
             //
@@ -251,65 +284,42 @@ namespace Pedagoška_sveska.Forme
             lbUceniciOcene.BorderStyle = BorderStyle.None;
             lbUceniciOcene.BackColor = Color.FromArgb(241, 242, 243);
             lbUceniciOcene.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbUceniciOcene.Size = new Size(pnlOcene.Width / 2 - 20, pnlOcene.Height - 20);
-            pnlOcene.Controls.Add(lbUceniciOcene);
-
-            //
-            //  lbUceniciAktivnost
-            //
-            lbUceniciAktivnost.Click += LbUceniciAktivnost_Click;
-            lbUceniciAktivnost.BackColor = Color.White;
-            lbUceniciAktivnost.Location = new Point(10, 10);
-            lbUceniciAktivnost.BorderStyle = BorderStyle.None;
-            lbUceniciAktivnost.BackColor = Color.FromArgb(241, 242, 243);
-            lbUceniciAktivnost.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbUceniciAktivnost.Size = new Size(pnlAktivnost.Width / 2 - 20, pnlAktivnost.Height - 20);
-            pnlAktivnost.Controls.Add(lbUceniciAktivnost);
+            lbUceniciOcene.Size = new Size(pnlUpisOcene.Width / 2 - 20, pnlUpisOcene.Height - 20);
+            pnlUpisOcene.Controls.Add(lbUceniciOcene);
 
             //
             //  lbOceneIzabran
             //
-            dgvOceneIzabran.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvOceneIzabran.ColumnCount = 2;
-            dgvOceneIzabran.Columns[0].Width = 80;
+            dgvOceneIzabran.Columns[0].Width = 70;
             dgvOceneIzabran.Columns[1].Width = 98;
+            dgvOceneIzabran.RowTemplate.Height = 30;
+            dgvOceneIzabran.ColumnHeadersHeight = 30;
             dgvOceneIzabran.Columns[0].Name = "Ocena";
             dgvOceneIzabran.Columns[1].Name = "Datum";
-            dgvOceneIzabran.BackColor = Color.White;
             dgvOceneIzabran.Location = new Point(10, 10);
             dgvOceneIzabran.BorderStyle = BorderStyle.None;
+            dgvOceneIzabran.Size = new Size(pnlUpisOcene.Width / 2 + 14, 52);
             dgvOceneIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            dgvOceneIzabran.Size = new Size(pnlOcene.Width / 2 + 24, pnlOcene.Height - 20);
             pnlOceneIzabran.Controls.Add(dgvOceneIzabran);
 
-            //
-            //  lbAktivnostIzabran
-            //
-            lbAktivnostIzabran.BackColor = Color.White;
-            lbAktivnostIzabran.Location = new Point(10, 10);
-            lbAktivnostIzabran.BorderStyle = BorderStyle.None;
-            lbAktivnostIzabran.BackColor = Color.FromArgb(241, 242, 243);
-            lbAktivnostIzabran.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            lbAktivnostIzabran.Size = new Size(pnlOcene.Width / 2 - 20, pnlOcene.Height - 20);
-            pnlAktivnostIzabran.Controls.Add(lbAktivnostIzabran);
-
             btnKalendar.Size = new Size(btnMinus.Width, btnMinus.Height);
-
+            /*
             if (ucenik == "")
             {
                 if (prikaz == "Aktivnost")
                 {
                     panel = 1;
-                    pnlOcene.Visible = false;
-                    pnlAktivnost.Visible = true;
+                    pnlUpisOcene.Visible = false;
+                    pnlPregledAktivnost.Visible = true;
                     pnlOceneIzabran.Visible = false;
                     pnlAktivnostIzabran.Visible = false;
                 }
                 else if (prikaz == "Ocene")
                 {
-                    panel = 2;
-                    pnlOcene.Visible = true;
-                    pnlAktivnost.Visible = false;
+                    panel = 2; 
+                    pnlUpisOcene.Visible = true;
+                    pnlPregledAktivnost.Visible = false;
                     pnlOceneIzabran.Visible = false;
                     pnlAktivnostIzabran.Visible = false;
                 }
@@ -319,35 +329,219 @@ namespace Pedagoška_sveska.Forme
                 if (prikaz == "Aktivnost")
                 {
                     panel = 3;
-                    pnlOcene.Visible = false;
-                    pnlAktivnost.Visible = false;
+                    pnlUpisOcene.Visible = false;
+                    pnlPregledAktivnost.Visible = false;
                     pnlOceneIzabran.Visible = false;
                     pnlAktivnostIzabran.Visible = true;
                 }
                 else if (prikaz == "Ocene")
                 {
                     panel = 4;
-                    pnlOcene.Visible = false;
-                    pnlAktivnost.Visible = false;
+                    pnlUpisOcene.Visible = false;
+                    pnlPregledAktivnost.Visible = false;
                     pnlOceneIzabran.Visible = true;
                     pnlAktivnostIzabran.Visible = false;
                 }
             }
+            */
+            if (ucenik != "")
+            {
+                if (upisPregled == "Pregled")
+                {
+                    if (prikaz == "Aktivnost")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = true;
+
+                    }
+                    else if (prikaz == "Ocene")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                }
+                else if (upisPregled == "Upis")
+                {
+                    if (prikaz == "Aktivnost")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = true;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                    else if (prikaz == "Ocene")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = true;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                }
+            }
+            else if (ucenik == "")
+            {
+                if (upisPregled == "Pregled")
+                {
+                    if (prikaz == "Aktivnost")
+                    {
+                        panel = 2;
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = true;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                    else if (prikaz == "Ocene")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                }
+                else if (upisPregled == "Upis")
+                {
+                    if (prikaz == "Aktivnost")
+                    {
+                        pnlUpisOcene.Visible = false;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = true;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                    else if (prikaz == "Ocene")
+                    {
+                        pnlUpisOcene.Visible = true;
+                        pnlUpisAktivnost.Visible = false;
+                        pnlUpisOceneIzabran.Visible = false;
+                        pnlPregledAktivnost.Visible = false;
+                        pnlUpisAktivnostIzabran.Visible = false;
+                        pnlPregledAktivnostIzabran.Visible = false;
+
+                    }
+                }
+            }
         }
-        private void BtnMinus_Click(object sender, EventArgs e)
+        private void pnlDizajn(Panel panel)
         {
-            znak = "-";
+            panel.Click += Deselect_Click;
+            panel.Location = new Point(30, 50);
+            panel.Size = new Size(ClientSize.Width - 60, ClientSize.Height - 95);
+        }
+        private void lblAktivnostDizajn(Label label)
+        {
+            label.Text = "Plusevi: - Minusevi: -";
+            label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Size = new Size(btnPlus.Width * 2 + 10, 50);
+            label.Location = new Point((ClientSize.Width - 60) / 2, 45);
+            label.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+        }
+        private void lbUceniciAktivnostDizajn(ListBox listBox)
+        {
+            listBox.BackColor = Color.Red;
+            listBox.Location = new Point(10, 10);
+            listBox.BorderStyle = BorderStyle.None;
+            listBox.BackColor = Color.FromArgb(241, 242, 243);
+            listBox.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            listBox.Size = new Size((ClientSize.Width - 60) / 2 - 20, (ClientSize.Height - 95) - 20);
+        }
+        private void btnAktivnostDizajn(Button button, string znak)
+        {
+            if(znak == "+")
+            {
+                button.Text = "+";
+                button.Click += BtnPlus_Click;
+                button.Location = new Point((5 * (ClientSize.Width - 60) / 8) - (button.Width / 2 + 5), (ClientSize.Height - 95) / 2);
+            }
+            else
+            {
+                button.Text = "-";
+                button.Click += BtnMinus_Click;
+                button.Location = new Point((5 * (ClientSize.Width - 60) / 8) + 5 + button.Width / 2, (ClientSize.Height - 95) / 2);
+            }
+            button.AutoSize = true;
+            button.Font = new Font("Times New Roman", 15F, FontStyle.Bold);
         }
         private void BtnPlus_Click(object sender, EventArgs e)
         {
-            znak = "+";
+            Znak = "+";
+            
+            btnPlus.ForeColor = Color.DarkGreen;
+            btnPlus.BackColor = Color.LightGreen;
+            btnPlusIzabran.ForeColor = Color.DarkGreen;
+            btnPlusIzabran.BackColor = Color.LightGreen;
+
+            btnMinus.ForeColor = Color.Black;
+            btnMinus.BackColor = Color.Transparent;
+            btnMinusIzabran.ForeColor = Color.Black;
+            btnMinusIzabran.BackColor = Color.Transparent;
+        }
+        private void BtnMinus_Click(object sender, EventArgs e)
+        {
+            Znak = "-";
+
+            btnPlus.ForeColor = Color.Black;
+            btnPlus.BackColor = Color.Transparent;
+            btnPlusIzabran.ForeColor = Color.Black;
+            btnPlusIzabran.BackColor = Color.Transparent;
+            
+            btnMinus.ForeColor = Color.DarkRed;
+            btnMinus.BackColor = Color.FromArgb(255, 133, 133);
+            btnMinusIzabran.ForeColor = Color.DarkRed;
+            btnMinusIzabran.BackColor = Color.FromArgb(255, 133, 133);
+        }
+        private void cbOcenaDizajn(ComboBox comboBox)
+        {
+            comboBox.Text = "Izaberite ocenu";
+            comboBox.Items.Add("Izaberite ocenu");
+            comboBox.Items.Add("1");
+            comboBox.Items.Add("2");
+            comboBox.Items.Add("3");
+            comboBox.Items.Add("4");
+            comboBox.Items.Add("5");
+            comboBox.Font = new Font("Times New Roman", 12F, FontStyle.Regular);
+            comboBox.Location = new Point((5 * (ClientSize.Width - 60) / 8) - (btnPlus.Width / 8 + 5), (ClientSize.Height - 95) / 2 - comboBox.Height);
+        }
+        private void dgvAktivnostDizajn(DataGridView dataGridView)
+        {
+            dataGridView.ColumnCount = 2;
+            dataGridView.Columns[0].Width = 90;
+            dataGridView.Columns[1].Width = 98;
+            dataGridView.RowTemplate.Height = 30;
+            dataGridView.ColumnHeadersHeight = 30;
+            dataGridView.Location = new Point(10, 10);
+            dataGridView.BorderStyle = BorderStyle.None;
+            dataGridView.Size = new Size((ClientSize.Width - 20) / 2 + 14, 152);
+            dataGridView.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
         }
         private void LbUceniciAktivnost_Click(object sender, EventArgs e)
         {
             var dataBase = new DataBase();
             int brojacPlus = 0;
             int brojacMinus = 0;
-            dataBase.Connect_db();
+            dataBase.conn.Open();
             string query = "SELECT `Aktivnost` FROM `aktivnost` WHERE `Predmet` = '" + predmet + "' AND `Ucenik` = '" + lbUceniciAktivnost.SelectedItem + "'";
             MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -364,14 +558,14 @@ namespace Pedagoška_sveska.Forme
 
             }
             reader.Close();
-            dataBase.Close_db();
+            dataBase.conn.Close();
 
             lblAktivnost.Text = "Plusevi: " + brojacPlus + " Minusevi: " + brojacMinus;
         }
         private void loadData()
         {
             var dataBase = new DataBase();
-            dataBase.Connect_db();
+            dataBase.conn.Open();
             if (panel == 1)
             {
                 string query = "SELECT `Username` FROM `korisnik` WHERE `Role` = 'user'";
@@ -384,7 +578,7 @@ namespace Pedagoška_sveska.Forme
                 while (reader.Read())
                     lbUceniciAktivnost.Items.Add(reader.GetString("Username"));
                 reader.Close();
-                dataBase.Close_db();
+                dataBase.conn.Close();
             }
             else if (panel == 2)
             {
@@ -396,9 +590,12 @@ namespace Pedagoška_sveska.Forme
                 adapter.Fill(dt);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
+                {
                     lbUceniciOcene.Items.Add(reader.GetString("Username"));
+
+                }
                 reader.Close();
-                dataBase.Close_db();
+                dataBase.conn.Close();
             }
             else if (panel == 3)
             {
@@ -413,7 +610,7 @@ namespace Pedagoška_sveska.Forme
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    lbAktivnostIzabran.Items.Add("'" + reader.GetString("Aktivnost") + "' - " + reader.GetString("Datum"));
+                    //lbAktivnostIzabran.Items.Add("'" + reader.GetString("Aktivnost") + "' - " + reader.GetString("Datum"));
 
                     if (reader.GetString("Aktivnost") == "+")
                         brojacPlus++;
@@ -422,7 +619,7 @@ namespace Pedagoška_sveska.Forme
 
                 }
                 reader.Close();
-                dataBase.Close_db();
+                dataBase.conn.Close();
                 lblAktivnostIzabran.Text = "Plusevi: " + brojacPlus + " Minusevi: " + brojacMinus;
             }
             else if (panel == 4)
@@ -435,35 +632,38 @@ namespace Pedagoška_sveska.Forme
                 adapter.Fill(dt);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
+                {
                     dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
+                    dgvOceneIzabran.Height += 30;
+                }
                 reader.Close();
-                dataBase.Close_db();
+                dataBase.conn.Close();
             }
         }
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             if (panel == 1)
             {
-                if (znak != "" && lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
+                if (Znak != "" && (string) lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
-                    dataBase.Connect_db();
-                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + lbUceniciAktivnost.SelectedItem + "','" + znak + "','" + predmet + "','" + lblDatum.Text + "')";
+                    dataBase.conn.Open();
+                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + lbUceniciAktivnost.SelectedItem + "','" + Znak + "','" + predmet + "','" + lblDatum.Text + "')";
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
                     DataTable dt = new DataTable();
                     cmd.CommandText = query;
                     adapter.Fill(dt);
-                    dataBase.Close_db();
+                    dataBase.conn.Close();
                 }
             }
             else if (panel == 2)
             {
-                if (cbOcene.SelectedIndex != -1 && lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
+                if (cbOcene.SelectedIndex != -1 && (string) lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     string query = "INSERT INTO `ocene`(`id`, `Ocena`, `Ucenik`, `Predmet`, `Datum`) VALUES ('" + null + "','" + cbOcene.SelectedIndex + "','" + lbUceniciOcene.SelectedItem + "','" + predmet + "','" + lblDatum.Text + "')";
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -471,24 +671,24 @@ namespace Pedagoška_sveska.Forme
                     DataTable dt = new DataTable();
                     cmd.CommandText = query;
                     adapter.Fill(dt);
-                    dataBase.Close_db();
+                    dataBase.conn.Close();
                 }
             }
             else if (panel == 3)
             {
-                if (znak != "" && lblDatum.Text != "")
+                if (Znak != "" && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
-                    dataBase.Connect_db();
-                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + ucenik + "','" + znak + "','" + predmet + "','" + lblDatum.Text + "')";
+                    dataBase.conn.Open();
+                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + ucenik + "','" + Znak + "','" + predmet + "','" + lblDatum.Text + "')";
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
                     DataTable dt = new DataTable();
                     cmd.CommandText = query;
                     adapter.Fill(dt);
-                    dataBase.Close_db();
-                    lbAktivnostIzabran.Items.Clear();
+                    dataBase.conn.Close();
+                    //lbAktivnostIzabran.Items.Clear();
                     loadData();
                 }
             }
@@ -497,7 +697,7 @@ namespace Pedagoška_sveska.Forme
                 if (cbOceneIzabran.SelectedIndex != -1 && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     string query = "INSERT INTO `ocene`(`id`, `Ocena`, `Ucenik`, `Predmet`, `Datum`) VALUES ('" + null + "','" + cbOceneIzabran.SelectedIndex + "','" + ucenik + "','" + predmet + "','" + lblDatum.Text + "')";
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -505,7 +705,7 @@ namespace Pedagoška_sveska.Forme
                     DataTable dt = new DataTable();
                     cmd.CommandText = query;
                     adapter.Fill(dt);
-                    dataBase.Close_db();
+                    dataBase.conn.Close();
                     dgvOceneIzabran.Rows.Clear();
                     loadData();
                 }

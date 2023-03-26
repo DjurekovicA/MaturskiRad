@@ -138,7 +138,7 @@ namespace Pedagoška_sveska.Forme
                 {
                     var dataBase = new DataBase();
                     string query = "SELECT `Ocena`,`Predmet`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + korisnik + "'";
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
@@ -149,13 +149,13 @@ namespace Pedagoška_sveska.Forme
                         dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
 
                     reader.Close();
-                    dataBase.Close_db();
+                    dataBase.conn.Open();
                 }
                 else if (prikaz == "Aktivnost")
                 {
                     var dataBase = new DataBase();
                     string query = "SELECT `Ucenik`, `Aktivnost`, `Predmet`, `Datum` FROM `aktivnost` WHERE `Ucenik` = '" + korisnik + "'";
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
@@ -166,7 +166,7 @@ namespace Pedagoška_sveska.Forme
                         dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
 
                     reader.Close();
-                    dataBase.Close_db();
+                    dataBase.conn.Clone();
                 }
             }
             else if (predmet != "")
@@ -175,7 +175,7 @@ namespace Pedagoška_sveska.Forme
                 {
                     var dataBase = new DataBase();
                     string query = "SELECT `Ocena`,`Predmet`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + korisnik + "' AND `Predmet`= '" + predmet + "'";
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
@@ -186,13 +186,13 @@ namespace Pedagoška_sveska.Forme
                         dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
 
                     reader.Close();
-                    dataBase.Close_db();
+                    dataBase.conn.Close();
                 }
                 else if (prikaz == "Aktivnost")
                 {
                     var dataBase = new DataBase();
                     string query = "SELECT `Ucenik`, `Aktivnost`, `Predmet`, `Datum` FROM `aktivnost` WHERE `Ucenik` = '" + korisnik + "' AND `Predmet`= '" + predmet + "'";
-                    dataBase.Connect_db();
+                    dataBase.conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = cmd;
@@ -203,7 +203,7 @@ namespace Pedagoška_sveska.Forme
                         dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
 
                     reader.Close();
-                    dataBase.Close_db();
+                    dataBase.conn.Close();
                 }
             }
         }

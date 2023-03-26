@@ -128,7 +128,7 @@ namespace Pedagoška_sveska.Forme
             int brojac = 0;
             var dataBase = new DataBase();
             string query = "SELECT `id`, `Username`, `Password`, `Role` FROM `korisnik`";
-            dataBase.Connect_db();
+            dataBase.conn.Open();
             MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             adapter.SelectCommand = cmd;
@@ -141,14 +141,14 @@ namespace Pedagoška_sveska.Forme
                 brojac++;
             }
             reader.Close();
-            dataBase.Close_db();
+            dataBase.conn.Close();
 
             foreach (string u in user)
             {
                 if (Username.Text == u)
                 {
                     var dataBase1 = new DataBase();
-                    dataBase1.Connect_db();
+                    dataBase1.conn.Open();
                     query = "SELECT * FROM `korisnik` WHERE `Username` = '" + u + "'";
                     MySqlCommand mySqlCommand = new MySqlCommand(query, dataBase1.conn); 
                     MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
@@ -162,7 +162,7 @@ namespace Pedagoška_sveska.Forme
                         {
                             string predmet = Predmet(u);
                             HomePage page = new HomePage(Username.Text, mySqlDataReader.GetString("Role"), predmet, this);
-                            dataBase1.Close_db();
+                            dataBase1.conn.Close();
                             page.Show();
                             Username.Text = "";
                             Password.Text = "";
@@ -178,7 +178,7 @@ namespace Pedagoška_sveska.Forme
             string id = "";
             var dataBase = new DataBase();
             string query = "SELECT `id` FROM `korisnik` WHERE `Username` = '" + username + "'";
-            dataBase.Connect_db();
+            dataBase.conn.Open();
             MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             adapter.SelectCommand = cmd;
@@ -188,10 +188,10 @@ namespace Pedagoška_sveska.Forme
             if (reader.Read())
                 id = reader.GetString("Id");
             reader.Close();
-            dataBase.Close_db();
+            dataBase.conn.Close();
 
             var dataBase1 = new DataBase();
-            dataBase1.Connect_db();
+            dataBase1.conn.Open();
             query = "SELECT `Naziv` FROM `predmeti` WHERE `Predavac` = '" + id + "'";
             MySqlCommand mySqlCommand = new MySqlCommand(query, dataBase1.conn);
             MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();

@@ -15,30 +15,5 @@ namespace Pedagoška_sveska.Resursi
         static string password = "";
         static string constring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID = " + username + ";" + "PASSWORD = " + password + ";";
         public MySqlConnection conn = new MySqlConnection(constring);
-        
-        public bool Connect_db()
-        {
-            try
-            {
-                conn.Open();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
-        }
-        public bool Close_db()
-        {
-            try
-            {
-                conn.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
     }
 }
