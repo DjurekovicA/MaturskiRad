@@ -57,6 +57,7 @@ namespace Pedagoška_sveska.Forme
         string predmet = "";
         string Znak = "";
         string upisPregled = "";
+        int panel = 0;
         public PrikazAdmin(string Ucenik, string Prikaz, string Predmet, string UpisPregled)
         {
             upisPregled = UpisPregled;
@@ -81,6 +82,7 @@ namespace Pedagoška_sveska.Forme
                     btnKalendar.Hide();
                     if (prikaz == "Aktivnost")
                     {
+                        panel = 1;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
@@ -92,6 +94,7 @@ namespace Pedagoška_sveska.Forme
                     }
                     else if (prikaz == "Ocene")
                     {
+                        panel = 2;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
@@ -106,6 +109,7 @@ namespace Pedagoška_sveska.Forme
                 {
                     if (prikaz == "Aktivnost")
                     {
+                        panel = 3;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
@@ -117,6 +121,7 @@ namespace Pedagoška_sveska.Forme
                     }
                     else if (prikaz == "Ocene")
                     {
+                        panel = 4;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = true;
@@ -137,6 +142,7 @@ namespace Pedagoška_sveska.Forme
                     btnKalendar.Hide();
                     if (prikaz == "Aktivnost")
                     {
+                        panel = 5;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
@@ -148,6 +154,7 @@ namespace Pedagoška_sveska.Forme
                     }
                     else if (prikaz == "Ocene")
                     {
+                        panel = 6;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
@@ -162,6 +169,7 @@ namespace Pedagoška_sveska.Forme
                 {
                     if (prikaz == "Aktivnost")
                     {
+                        panel = 7;
                         pnlUpisOcene.Visible = false;
                         pnlUpisAktivnost.Visible = true;
                         pnlUpisOceneIzabran.Visible = false;
@@ -173,7 +181,8 @@ namespace Pedagoška_sveska.Forme
                     }
                     else if (prikaz == "Ocene")
                     {
-                        pnlUpisOcene.Visible = true;
+                        panel = 8;
+                        pnlUpisOcene.Visible = true; 
                         pnlUpisAktivnost.Visible = false;
                         pnlUpisOceneIzabran.Visible = false;
                         pnlUpisAktivnostIzabran.Visible = false;
@@ -322,9 +331,8 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvOceneIzabranUpis
                 //
-                dgvDizajn(dgvOceneIzabranUpis, 0);
+                dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
                 dgvOceneIzabranUpis.Columns[0].Name = "Ocena";
-                pnlUpisOceneIzabran.Controls.Add(dgvOceneIzabranUpis);
             }
             
             //
@@ -337,9 +345,8 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvAktivnostIzabranUpis
                 //
-                dgvDizajn(dgvAktivnostIzabranUpis, 0);
+                dodajDGV(pnlUpisAktivnostIzabran, dgvAktivnostIzabranUpis, 0);
                 dgvAktivnostIzabranUpis.Columns[0].Name = "Aktivnost";
-                pnlUpisAktivnostIzabran.Controls.Add(dgvAktivnostIzabranUpis);
 
                 //
                 //  lblAktivnostIzabran
@@ -370,8 +377,7 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvOcene
                 //
-                dgvDizajn(dgvOcene, 13);
-                pnlPregledOcene.Controls.Add(dgvOcene);
+                dodajDGV(pnlPregledOcene, dgvOcene, 13);
             }
 
             //
@@ -384,6 +390,7 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvAktivnost
                 //
+                dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
                 dgvDizajn(dgvAktivnost, 23);
                 pnlPregledAktivnost.Controls.Add(dgvAktivnost);
             }
@@ -418,6 +425,11 @@ namespace Pedagoška_sveska.Forme
 
             btnKalendar.Size = new Size(btnMinus.Width, btnMinus.Height);
         }
+        private void dodajDGV(Panel panel, DataGridView dataGridView, int broj)
+        {
+            dgvDizajn(dataGridView, broj);
+            panel.Controls.Add(dataGridView);
+        } 
         private void pnlDizajn(Panel panel)
         {
             panel.Click += Deselect_Click;
@@ -450,7 +462,7 @@ namespace Pedagoška_sveska.Forme
                 button.Click += BtnPlus_Click;
                 button.Location = new Point((5 * (ClientSize.Width - 60) / 8) - (button.Width / 2 + 5) + 45, (ClientSize.Height - 95) / 2);
             }
-            else
+            else if (znak == "-")
             {
                 button.Text = "-";
                 button.Click += BtnMinus_Click;
@@ -601,28 +613,103 @@ namespace Pedagoška_sveska.Forme
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataTable dt = new DataTable();
 
-            if (pnlPregledOcene.Visible)
+            if (panel == 1)
             {
-                dgvDizajn(dgvOcene, 13);
+                dgvDizajn(dgvAktivnostIzabran, 22);
                 dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Predmet` = '" + predmet + "'";
+                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik` = '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                 adapter.SelectCommand = cmd;
                 adapter.Fill(dt);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    dgvOcene.Rows.Add(reader.GetString("Ucenik"), reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
-                        dgvOcene.Height += 30;
+                    dgvAktivnostIzabran.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                    if (dgvAktivnostIzabran.Height < dgvAktivnostIzabran.MaximumSize.Height)
+                        dgvAktivnostIzabran.Height += 30;
                 }
 
-                if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
-                    dgvOcene.Width += 17;
+                if (dgvAktivnostIzabran.Height >= dgvAktivnostIzabran.MaximumSize.Height)
+                    dgvAktivnostIzabran.Width += 17;
                 reader.Close();
                 dataBase.conn.Close();
-            } 
-            else if (pnlPregledAktivnost.Visible)
+            }
+            else if (panel == 2)
+            {
+                dgvDizajn(dgvOceneIzabran, 12);
+                dataBase.conn.Open();
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOceneIzabran.Height < dgvOceneIzabran.MaximumSize.Height)
+                        dgvOceneIzabran.Height += 30;
+                }
+
+                if (dgvOceneIzabran.Height >= dgvOceneIzabran.MaximumSize.Height)
+                    dgvOceneIzabran.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 3)
+            {
+                dgvDizajn(dgvAktivnostIzabranUpis, 0);
+                int brPlus = 0;
+                int brMinus = 0;
+
+                dataBase.conn.Open();
+                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader.GetString("Aktivnost") == "+")
+                        brPlus++;
+                    else if (reader.GetString("Aktivnost") == "-")
+                        brMinus++;
+
+                    dgvAktivnostIzabranUpis.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                    if (dgvAktivnostIzabranUpis.Height < 210)
+                        dgvAktivnostIzabranUpis.Height += 30;
+                }
+
+                if (dgvAktivnostIzabranUpis.Height >= 210)
+                {
+                    dgvAktivnostIzabranUpis.Width += 17;
+                    dgvAktivnostIzabranUpis.Location = new Point(0, 10);
+                }
+                lblAktivnostIzabran.Text = "Plusevi: " + brPlus + " Minusevi: " + brMinus;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 4)
+            {
+                dgvDizajn(dgvOceneIzabranUpis, 0);
+                dataBase.conn.Open();
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvOceneIzabranUpis.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOceneIzabranUpis.Height < 210)
+                        dgvOceneIzabranUpis.Height += 30;
+                }
+
+                if (dgvOceneIzabranUpis.Height >= 210)
+                    dgvOceneIzabranUpis.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 5)
             {
                 dgvDizajn(dgvAktivnost, 23);
                 dataBase.conn.Open();
@@ -663,138 +750,31 @@ namespace Pedagoška_sveska.Forme
                 reader.Close();
                 dataBase.conn.Close();
             }
-            else if (pnlPregledOceneIzabran.Visible)
+            else if (panel == 6)
             {
-                dgvDizajn(dgvOceneIzabran, 12);
+                dgvDizajn(dgvOcene, 13);
                 dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
                 adapter.SelectCommand = cmd;
                 adapter.Fill(dt);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOceneIzabran.Height < dgvOceneIzabran.MaximumSize.Height)
-                        dgvOceneIzabran.Height += 30;
+                    dgvOcene.Rows.Add(reader.GetString("Ucenik"), reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
+                        dgvOcene.Height += 30;
                 }
 
-                if (dgvOceneIzabran.Height >= dgvOceneIzabran.MaximumSize.Height)
-                    dgvOceneIzabran.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (pnlPregledAktivnostIzabran.Visible)
-            {
-                dgvDizajn(dgvAktivnostIzabran, 22);
-                dataBase.conn.Open();
-                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik` = '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvAktivnostIzabran.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
-                    if (dgvAktivnostIzabran.Height < dgvAktivnostIzabran.MaximumSize.Height)
-                        dgvAktivnostIzabran.Height += 30;
-                }
-
-                if (dgvAktivnostIzabran.Height >= dgvAktivnostIzabran.MaximumSize.Height)
-                    dgvAktivnostIzabran.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (pnlUpisOceneIzabran.Visible)
-            {
-                dgvDizajn(dgvOceneIzabranUpis, 0);
-                dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvOceneIzabranUpis.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOceneIzabranUpis.Height < 210)
-                        dgvOceneIzabranUpis.Height += 30;
-                }
-
-                if (dgvOceneIzabranUpis.Height >= 210)
-                    dgvOceneIzabranUpis.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (pnlUpisAktivnostIzabran.Visible)
-            {
-                dgvDizajn(dgvAktivnostIzabranUpis, 0);
-                int brPlus = 0;
-                int brMinus = 0;
-
-                dataBase.conn.Open();
-                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.GetString("Aktivnost") == "+")
-                        brPlus++;
-                    else if (reader.GetString("Aktivnost") == "-")
-                        brMinus++;
-
-                    dgvAktivnostIzabranUpis.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
-                    if (dgvAktivnostIzabranUpis.Height < 210)
-                        dgvAktivnostIzabranUpis.Height += 30;
-                }
-
-                if (dgvAktivnostIzabranUpis.Height >= 210)
-                {
-                    dgvAktivnostIzabranUpis.Width += 17;
-                    dgvAktivnostIzabranUpis.Location = new Point(0, 10);
-                }
-                lblAktivnostIzabran.Text = "Plusevi: " + brPlus + " Minusevi: " + brMinus;
+                if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
+                    dgvOcene.Width += 17;
                 reader.Close();
                 dataBase.conn.Close();
             } 
         }
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (pnlUpisAktivnost.Visible)
-            {
-                if (Znak != "" && (string) lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
-                {
-                    var dataBase = new DataBase();
-                    dataBase.conn.Open();
-                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + lbUceniciAktivnost.SelectedItem + "','" + Znak + "','" + predmet + "','" + lblDatum.Text + "')";
-                    MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter();
-                    adapter.SelectCommand = cmd;
-                    DataTable dt = new DataTable();
-                    cmd.CommandText = query;
-                    adapter.Fill(dt);
-                    dataBase.conn.Close();
-                }
-            }
-            else if (pnlUpisOcene.Visible)
-            {
-                if (cbOcene.SelectedIndex != -1 && (string) lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
-                {
-                    var dataBase = new DataBase();
-                    dataBase.conn.Open();
-                    string query = "INSERT INTO `ocene`(`id`, `Ocena`, `Ucenik`, `Predmet`, `Datum`) VALUES ('" + null + "','" + cbOcene.SelectedIndex + "','" + lbUceniciOcene.SelectedItem + "','" + predmet + "','" + lblDatum.Text + "')";
-                    MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter();
-                    adapter.SelectCommand = cmd;
-                    DataTable dt = new DataTable();
-                    cmd.CommandText = query;
-                    adapter.Fill(dt);
-                    dataBase.conn.Close();
-                }
-            }
-            else if (pnlUpisAktivnostIzabran.Visible)
+            if (panel == 3)
             {
                 if (Znak != "" && lblDatum.Text != "")
                 {
@@ -811,8 +791,14 @@ namespace Pedagoška_sveska.Forme
                     dgvAktivnostIzabranUpis.Rows.Clear();
                     dgvDizajn(dgvAktivnostIzabranUpis, 0);
                 }
+                Znak = "";
+                lblDatum.Text = "";
+                btnPlusIzabran.ForeColor = Color.Black;
+                btnPlusIzabran.BackColor = Color.Transparent;
+                btnMinusIzabran.ForeColor = Color.Black;
+                btnMinusIzabran.BackColor = Color.Transparent;
             }
-            else if (pnlUpisOceneIzabran.Visible)
+            else if (panel == 4)
             {
                 if (cbOceneIzabran.SelectedIndex != -1 && lblDatum.Text != "")
                 {
@@ -829,26 +815,69 @@ namespace Pedagoška_sveska.Forme
                     dgvOceneIzabranUpis.Rows.Clear();
                     dgvDizajn(dgvOceneIzabranUpis, 0);
                 }
+                lblDatum.Text = "";
+                cbOceneIzabran.SelectedItem = 0;
+            }
+            else if (panel == 7)
+            {
+                if (Znak != "" && (string) lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
+                {
+                    var dataBase = new DataBase();
+                    dataBase.conn.Open();
+                    string query = "INSERT INTO `aktivnost`(`id`, `Ucenik`, `Aktivnost`, `Predmet`, `Datum`) VALUES ('" + null + "','" + lbUceniciAktivnost.SelectedItem + "','" + Znak + "','" + predmet + "','" + lblDatum.Text + "')";
+                    MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    adapter.SelectCommand = cmd;
+                    DataTable dt = new DataTable();
+                    cmd.CommandText = query;
+                    adapter.Fill(dt);
+                    dataBase.conn.Close();
+                }
+                Znak = "";
+                lblDatum.Text = "";
+                btnPlus.ForeColor = Color.Black;
+                btnPlus.BackColor = Color.Transparent;
+                btnMinus.ForeColor = Color.Black;
+                btnMinus.BackColor = Color.Transparent;
+            }
+            else if (panel == 8)
+            {
+                if (cbOcene.SelectedIndex != -1 && (string) lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
+                {
+                    var dataBase = new DataBase();
+                    dataBase.conn.Open();
+                    string query = "INSERT INTO `ocene`(`id`, `Ocena`, `Ucenik`, `Predmet`, `Datum`) VALUES ('" + null + "','" + cbOcene.SelectedIndex + "','" + lbUceniciOcene.SelectedItem + "','" + predmet + "','" + lblDatum.Text + "')";
+                    MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    adapter.SelectCommand = cmd;
+                    DataTable dt = new DataTable();
+                    cmd.CommandText = query;
+                    adapter.Fill(dt);
+                    dataBase.conn.Close();
+                }
+                lblDatum.Text = "";
+                cbOcene.SelectedItem = 0;
             }
             loadData();
         }
-
         private void BtnKalendar_Click(object sender, EventArgs e)
         {
             Datum datum = new Datum();
             datum.ShowDialog();
             lblDatum.Text = datum.ReturnValue;
         }
-
         private void Deselect_Click(object sender, EventArgs e)
         {
             lbUceniciOcene.SelectedIndex = -1;
             lbUceniciAktivnost.SelectedIndex = -1;
         }
-
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void PrikazAdmin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
