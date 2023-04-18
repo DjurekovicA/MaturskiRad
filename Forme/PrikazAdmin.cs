@@ -390,9 +390,7 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvAktivnost
                 //
-                dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
-                dgvDizajn(dgvAktivnost, 23);
-                pnlPregledAktivnost.Controls.Add(dgvAktivnost);
+                dodajDGV(pnlPregledAktivnost, dgvAktivnost, 23);
             }
 
             //
@@ -405,8 +403,7 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvOceneIzabran
                 //
-                dgvDizajn(dgvOceneIzabran, 12);
-                pnlPregledOceneIzabran.Controls.Add(dgvOceneIzabran);
+                dodajDGV(pnlPregledOceneIzabran, dgvOceneIzabran, 12);
             }
 
             //
@@ -419,8 +416,7 @@ namespace Pedagoška_sveska.Forme
                 //
                 //  dgvAktivnostIzabran
                 //
-                dgvDizajn(dgvAktivnostIzabran, 22);
-                pnlPregledAktivnostIzabran.Controls.Add(dgvAktivnostIzabran);
+                dodajDGV(pnlPregledAktivnostIzabran, dgvAktivnostIzabran, 22);
             }
 
             btnKalendar.Size = new Size(btnMinus.Width, btnMinus.Height);
@@ -788,9 +784,9 @@ namespace Pedagoška_sveska.Forme
                     cmd.CommandText = query;
                     adapter.Fill(dt);
                     dataBase.conn.Close();
-                    dgvAktivnostIzabranUpis.Rows.Clear();
-                    dgvDizajn(dgvAktivnostIzabranUpis, 0);
                 }
+                pnlUpisAktivnostIzabran.Controls.Remove(dgvAktivnostIzabranUpis);
+                dodajDGV(pnlUpisAktivnostIzabran, dgvAktivnostIzabranUpis, 0);
                 Znak = "";
                 lblDatum.Text = "";
                 btnPlusIzabran.ForeColor = Color.Black;
@@ -815,6 +811,8 @@ namespace Pedagoška_sveska.Forme
                     dgvOceneIzabranUpis.Rows.Clear();
                     dgvDizajn(dgvOceneIzabranUpis, 0);
                 }
+                pnlUpisOceneIzabran.Controls.Remove(dgvOceneIzabranUpis);
+                dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
                 lblDatum.Text = "";
                 cbOceneIzabran.SelectedItem = 0;
             }
