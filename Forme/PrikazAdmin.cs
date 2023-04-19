@@ -421,11 +421,6 @@ namespace Pedagoška_sveska.Forme
 
             btnKalendar.Size = new Size(btnMinus.Width, btnMinus.Height);
         }
-        private void dodajDGV(Panel panel, DataGridView dataGridView, int broj)
-        {
-            dgvDizajn(dataGridView, broj);
-            panel.Controls.Add(dataGridView);
-        } 
         private void pnlDizajn(Panel panel)
         {
             panel.Click += Deselect_Click;
@@ -466,34 +461,6 @@ namespace Pedagoška_sveska.Forme
             }
             button.AutoSize = true;
             button.Font = new Font("Times New Roman", 15F, FontStyle.Bold);
-        }
-        private void BtnPlus_Click(object sender, EventArgs e)
-        {
-            Znak = "+";
-            
-            btnPlus.ForeColor = Color.DarkGreen;
-            btnPlus.BackColor = Color.LightGreen;
-            btnPlusIzabran.ForeColor = Color.DarkGreen;
-            btnPlusIzabran.BackColor = Color.LightGreen;
-
-            btnMinus.ForeColor = Color.Black;
-            btnMinus.BackColor = Color.Transparent;
-            btnMinusIzabran.ForeColor = Color.Black;
-            btnMinusIzabran.BackColor = Color.Transparent;
-        }
-        private void BtnMinus_Click(object sender, EventArgs e)
-        {
-            Znak = "-";
-
-            btnPlus.ForeColor = Color.Black;
-            btnPlus.BackColor = Color.Transparent;
-            btnPlusIzabran.ForeColor = Color.Black;
-            btnPlusIzabran.BackColor = Color.Transparent;
-            
-            btnMinus.ForeColor = Color.DarkRed;
-            btnMinus.BackColor = Color.FromArgb(255, 133, 133);
-            btnMinusIzabran.ForeColor = Color.DarkRed;
-            btnMinusIzabran.BackColor = Color.FromArgb(255, 133, 133);
         }
         private void cbOcenaDizajn(ComboBox comboBox)
         {
@@ -561,6 +528,11 @@ namespace Pedagoška_sveska.Forme
                 dataGridView.MaximumSize = new Size(pnlPregledOcene.Width - 20, pnlPregledOcene.Height - 20);
             }
         }
+        private void dodajDGV(Panel panel, DataGridView dataGridView, int broj)
+        {
+            dgvDizajn(dataGridView, broj);
+            panel.Controls.Add(dataGridView);
+        } 
         private void LbUcenici_Click(object sender, EventArgs e)
         {
             var dataBase = new DataBase();
@@ -580,193 +552,54 @@ namespace Pedagoška_sveska.Forme
                     brojacPlus++;
                 else if (reader.GetString("Aktivnost") == "-")
                     brojacMinus++;
-
             }
             reader.Close();
             dataBase.conn.Close();
 
             lblAktivnost.Text = "Plusevi: " + brojacPlus + " Minusevi: " + brojacMinus;
         }
-        private void loadUcenici(ListBox listBox)
+        private void BtnKalendar_Click(object sender, EventArgs e)
         {
-            var dataBase = new DataBase();
-            dataBase.conn.Open();
-            string query = "SELECT `Username` FROM `korisnik` WHERE `role` = 'user'";
-            MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
-            adapter.SelectCommand = cmd;
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-                listBox.Items.Add(reader.GetString("Username"));
-            reader.Close();
-            dataBase.conn.Close();
+            Datum datum = new Datum();
+            datum.ShowDialog();
+            lblDatum.Text = datum.ReturnValue;
         }
-        private void loadData()
+        private void Deselect_Click(object sender, EventArgs e)
         {
-            var dataBase = new DataBase();
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
-            DataTable dt = new DataTable();
+            lbUceniciOcene.SelectedIndex = -1;
+            lbUceniciAktivnost.SelectedIndex = -1;
+        }
+        private void PrikazAdmin_Load(object sender, EventArgs e)
+        {
 
-            if (panel == 1)
-            {
-                dgvDizajn(dgvAktivnostIzabran, 22);
-                dataBase.conn.Open();
-                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik` = '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvAktivnostIzabran.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
-                    if (dgvAktivnostIzabran.Height < dgvAktivnostIzabran.MaximumSize.Height)
-                        dgvAktivnostIzabran.Height += 30;
-                }
+        }
+        private void BtnPlus_Click(object sender, EventArgs e)
+        {
+            Znak = "+";
+            
+            btnPlus.ForeColor = Color.DarkGreen;
+            btnPlus.BackColor = Color.LightGreen;
+            btnPlusIzabran.ForeColor = Color.DarkGreen;
+            btnPlusIzabran.BackColor = Color.LightGreen;
 
-                if (dgvAktivnostIzabran.Height >= dgvAktivnostIzabran.MaximumSize.Height)
-                    dgvAktivnostIzabran.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (panel == 2)
-            {
-                dgvDizajn(dgvOceneIzabran, 12);
-                dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOceneIzabran.Height < dgvOceneIzabran.MaximumSize.Height)
-                        dgvOceneIzabran.Height += 30;
-                }
+            btnMinus.ForeColor = Color.Black;
+            btnMinus.BackColor = Color.Transparent;
+            btnMinusIzabran.ForeColor = Color.Black;
+            btnMinusIzabran.BackColor = Color.Transparent;
+        }
+        private void BtnMinus_Click(object sender, EventArgs e)
+        {
+            Znak = "-";
 
-                if (dgvOceneIzabran.Height >= dgvOceneIzabran.MaximumSize.Height)
-                    dgvOceneIzabran.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (panel == 3)
-            {
-                dgvDizajn(dgvAktivnostIzabranUpis, 0);
-                int brPlus = 0;
-                int brMinus = 0;
-
-                dataBase.conn.Open();
-                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.GetString("Aktivnost") == "+")
-                        brPlus++;
-                    else if (reader.GetString("Aktivnost") == "-")
-                        brMinus++;
-
-                    dgvAktivnostIzabranUpis.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
-                    if (dgvAktivnostIzabranUpis.Height < 210)
-                        dgvAktivnostIzabranUpis.Height += 30;
-                }
-
-                if (dgvAktivnostIzabranUpis.Height >= 210)
-                {
-                    dgvAktivnostIzabranUpis.Width += 17;
-                    dgvAktivnostIzabranUpis.Location = new Point(0, 10);
-                }
-                lblAktivnostIzabran.Text = "Plusevi: " + brPlus + " Minusevi: " + brMinus;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (panel == 4)
-            {
-                dgvDizajn(dgvOceneIzabranUpis, 0);
-                dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvOceneIzabranUpis.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOceneIzabranUpis.Height < 210)
-                        dgvOceneIzabranUpis.Height += 30;
-                }
-
-                if (dgvOceneIzabranUpis.Height >= 210)
-                    dgvOceneIzabranUpis.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (panel == 5)
-            {
-                dgvDizajn(dgvAktivnost, 23);
-                dataBase.conn.Open();
-                string query = "SELECT * FROM `korisnik`WHERE `Role` = 'user'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    int brPlus = 0;
-                    int brMinus = 0;
-
-                    var dbase = new DataBase();
-                    dbase.conn.Open();
-                    string Query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + reader.GetString("Username") + "' AND `Predmet` = '" + predmet + "'";
-                    MySqlCommand mycmd = new MySqlCommand(Query, dbase.conn);
-                    MySqlDataAdapter myAdapter = new MySqlDataAdapter(mycmd);
-                    DataTable dataTable = new DataTable();
-                    myAdapter.Fill(dataTable);
-                    MySqlDataReader myreader = mycmd.ExecuteReader();
-                    while (myreader.Read())
-                    {
-                        if (myreader.GetString("Aktivnost") == "+")
-                            brPlus++;
-                        else if (myreader.GetString("Aktivnost") == "-")
-                            brMinus++;
-                    }
-                    dgvAktivnost.Rows.Add(reader.GetString("Username"), brPlus.ToString(), brMinus.ToString());
-                    if (dgvAktivnost.Height < dgvAktivnost.MaximumSize.Height)
-                        dgvAktivnost.Height += 30;
-                    myreader.Close();
-                    dbase.conn.Close();
-                }
-
-                if (dgvAktivnost.Height >= dgvAktivnost.MaximumSize.Height)
-                    dgvAktivnost.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            }
-            else if (panel == 6)
-            {
-                dgvDizajn(dgvOcene, 13);
-                dataBase.conn.Open();
-                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Predmet` = '" + predmet + "'";
-                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dt);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dgvOcene.Rows.Add(reader.GetString("Ucenik"), reader.GetString("Ocena"), reader.GetString("Datum"));
-                    if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
-                        dgvOcene.Height += 30;
-                }
-
-                if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
-                    dgvOcene.Width += 17;
-                reader.Close();
-                dataBase.conn.Close();
-            } 
+            btnPlus.ForeColor = Color.Black;
+            btnPlus.BackColor = Color.Transparent;
+            btnPlusIzabran.ForeColor = Color.Black;
+            btnPlusIzabran.BackColor = Color.Transparent;
+            
+            btnMinus.ForeColor = Color.DarkRed;
+            btnMinus.BackColor = Color.FromArgb(255, 133, 133);
+            btnMinusIzabran.ForeColor = Color.DarkRed;
+            btnMinusIzabran.BackColor = Color.FromArgb(255, 133, 133);
         }
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -858,24 +691,182 @@ namespace Pedagoška_sveska.Forme
             }
             loadData();
         }
-        private void BtnKalendar_Click(object sender, EventArgs e)
-        {
-            Datum datum = new Datum();
-            datum.ShowDialog();
-            lblDatum.Text = datum.ReturnValue;
-        }
-        private void Deselect_Click(object sender, EventArgs e)
-        {
-            lbUceniciOcene.SelectedIndex = -1;
-            lbUceniciAktivnost.SelectedIndex = -1;
-        }
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-        private void PrikazAdmin_Load(object sender, EventArgs e)
+        private void loadUcenici(ListBox listBox)
         {
+            var dataBase = new DataBase();
+            dataBase.conn.Open();
+            string query = "SELECT `Username` FROM `korisnik` WHERE `role` = 'user'";
+            MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            adapter.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                listBox.Items.Add(reader.GetString("Username"));
+            reader.Close();
+            dataBase.conn.Close();
+        }
+        private void loadData()
+        {
+            var dataBase = new DataBase();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataTable dt = new DataTable();
 
+            if (panel == 1)
+            {
+                dgvDizajn(dgvAktivnostIzabran, 22);
+                dataBase.conn.Open();
+                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik` = '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvAktivnostIzabran.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                    if (dgvAktivnostIzabran.Height < dgvAktivnostIzabran.MaximumSize.Height)
+                        dgvAktivnostIzabran.Height += 30;
+                }
+                if (dgvAktivnostIzabran.Height >= dgvAktivnostIzabran.MaximumSize.Height)
+                    dgvAktivnostIzabran.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 2)
+            {
+                dgvDizajn(dgvOceneIzabran, 12);
+                dataBase.conn.Open();
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvOceneIzabran.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOceneIzabran.Height < dgvOceneIzabran.MaximumSize.Height)
+                        dgvOceneIzabran.Height += 30;
+                }
+                if (dgvOceneIzabran.Height >= dgvOceneIzabran.MaximumSize.Height)
+                    dgvOceneIzabran.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 3)
+            {
+                dgvDizajn(dgvAktivnostIzabranUpis, 0);
+                int brPlus = 0;
+                int brMinus = 0;
+                dataBase.conn.Open();
+                string query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader.GetString("Aktivnost") == "+")
+                        brPlus++;
+                    else if (reader.GetString("Aktivnost") == "-")
+                        brMinus++;
+                    dgvAktivnostIzabranUpis.Rows.Add(reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                    if (dgvAktivnostIzabranUpis.Height < 210)
+                        dgvAktivnostIzabranUpis.Height += 30;
+                }
+                if (dgvAktivnostIzabranUpis.Height >= 210)
+                {
+                    dgvAktivnostIzabranUpis.Width += 17;
+                    dgvAktivnostIzabranUpis.Location = new Point(0, 10);
+                }
+                lblAktivnostIzabran.Text = "Plusevi: " + brPlus + " Minusevi: " + brMinus;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 4)
+            {
+                dgvDizajn(dgvOceneIzabranUpis, 0);
+                dataBase.conn.Open();
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvOceneIzabranUpis.Rows.Add(reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOceneIzabranUpis.Height < 210)
+                        dgvOceneIzabranUpis.Height += 30;
+                }
+                if (dgvOceneIzabranUpis.Height >= 210)
+                    dgvOceneIzabranUpis.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 5)
+            {
+                dgvDizajn(dgvAktivnost, 23);
+                dataBase.conn.Open();
+                string query = "SELECT * FROM `korisnik`WHERE `Role` = 'user'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int brPlus = 0;
+                    int brMinus = 0;
+                    var dbase = new DataBase();
+                    dbase.conn.Open();
+                    string Query = "SELECT * FROM `aktivnost` WHERE `Ucenik`= '" + reader.GetString("Username") + "' AND `Predmet` = '" + predmet + "'";
+                    MySqlCommand mycmd = new MySqlCommand(Query, dbase.conn);
+                    MySqlDataAdapter myAdapter = new MySqlDataAdapter(mycmd);
+                    DataTable dataTable = new DataTable();
+                    myAdapter.Fill(dataTable);
+                    MySqlDataReader myreader = mycmd.ExecuteReader();
+                    while (myreader.Read())
+                    {
+                        if (myreader.GetString("Aktivnost") == "+")
+                            brPlus++;
+                        else if (myreader.GetString("Aktivnost") == "-")
+                            brMinus++;
+                    }
+                    dgvAktivnost.Rows.Add(reader.GetString("Username"), brPlus.ToString(), brMinus.ToString());
+                    if (dgvAktivnost.Height < dgvAktivnost.MaximumSize.Height)
+                        dgvAktivnost.Height += 30;
+                    myreader.Close();
+                    dbase.conn.Close();
+                }
+
+                if (dgvAktivnost.Height >= dgvAktivnost.MaximumSize.Height)
+                    dgvAktivnost.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            }
+            else if (panel == 6)
+            {
+                dgvDizajn(dgvOcene, 13);
+                dataBase.conn.Open();
+                string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Predmet` = '" + predmet + "'";
+                MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dt);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dgvOcene.Rows.Add(reader.GetString("Ucenik"), reader.GetString("Ocena"), reader.GetString("Datum"));
+                    if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
+                        dgvOcene.Height += 30;
+                }
+                if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
+                    dgvOcene.Width += 17;
+                reader.Close();
+                dataBase.conn.Close();
+            } 
         }
     }
 }
