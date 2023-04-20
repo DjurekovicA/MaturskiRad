@@ -16,11 +16,11 @@ namespace Pedagoška_sveska.Forme
     {
         private Panel panel = new Panel();
         private Label Label = new Label();
+        private Label LabelPassword = new Label();
+        private Label LabelUsername = new Label();
         private Button btnEnter = new Button();
         private TextBox Username = new TextBox();
         private TextBox Password = new TextBox();
-        private Label LabelPassword = new Label();
-        private Label LabelUsername = new Label();
 
         public Login()
         {
@@ -74,15 +74,11 @@ namespace Pedagoška_sveska.Forme
             //  Username
             //
             Username.MaxLength = 20;
+            Username.Text = "Unesite ime";
             Username.Click += Username_Click;
-            Username.ForeColor = Color.Black;
             Username.Size = new Size(172, 60);
+            Username.ForeColor = Color.LightGray;
             Username.Location = new Point(39, 120);
-            if (Username.Text == "")
-            {
-                Username.Text = "Unesite ime";
-                Username.ForeColor = Color.LightGray;
-            }
             Username.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(Username);
 
@@ -218,9 +214,9 @@ namespace Pedagoška_sveska.Forme
             {
                 Username.Text = "Unesite ime";
                 Username.ForeColor = Color.LightGray;
+            }
                 panel.Focus();
                 return;
-            }
         }
 
         private void Username_Click(object sender, EventArgs e)

@@ -641,8 +641,6 @@ namespace Pedagoška_sveska.Forme
                     cmd.CommandText = query;
                     adapter.Fill(dt);
                     dataBase.conn.Close();
-                    dgvOceneIzabranUpis.Rows.Clear();
-                    dgvDizajn(dgvOceneIzabranUpis, 0);
                 }
                 pnlUpisOceneIzabran.Controls.Remove(dgvOceneIzabranUpis);
                 dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
@@ -719,7 +717,6 @@ namespace Pedagoška_sveska.Forme
 
             if (panel == 1)
             {
-                dgvDizajn(dgvAktivnostIzabran, 22);
                 dataBase.conn.Open();
                 string query = "SELECT * FROM `aktivnost` WHERE `Ucenik` = '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
@@ -739,7 +736,6 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 2)
             {
-                dgvDizajn(dgvOceneIzabran, 12);
                 dataBase.conn.Open();
                 string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
@@ -759,7 +755,6 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 3)
             {
-                dgvDizajn(dgvAktivnostIzabranUpis, 0);
                 int brPlus = 0;
                 int brMinus = 0;
                 dataBase.conn.Open();
@@ -778,7 +773,7 @@ namespace Pedagoška_sveska.Forme
                     if (dgvAktivnostIzabranUpis.Height < 210)
                         dgvAktivnostIzabranUpis.Height += 30;
                 }
-                if (dgvAktivnostIzabranUpis.Height >= 210)
+                if (dgvAktivnostIzabranUpis.Height < 210)
                 {
                     dgvAktivnostIzabranUpis.Width += 17;
                     dgvAktivnostIzabranUpis.Location = new Point(0, 10);
@@ -789,7 +784,6 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 4)
             {
-                dgvDizajn(dgvOceneIzabranUpis, 0);
                 dataBase.conn.Open();
                 string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + ucenik + "' AND `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
@@ -809,7 +803,6 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 5)
             {
-                dgvDizajn(dgvAktivnost, 23);
                 dataBase.conn.Open();
                 string query = "SELECT * FROM `korisnik`WHERE `Role` = 'user'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
@@ -849,7 +842,6 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 6)
             {
-                dgvDizajn(dgvOcene, 13);
                 dataBase.conn.Open();
                 string query = "SELECT `Ocena`, `Ucenik`, `Datum` FROM `ocene` WHERE `Predmet` = '" + predmet + "'";
                 MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
