@@ -57,7 +57,8 @@ namespace Pedagoška_sveska.Forme
             rbAdd.Text = "Upis";
             rbAdd.Location = new Point(425, 95);
             rbAdd.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            Controls.Add(rbAdd);
+            if (role == "admin")
+                Controls.Add(rbAdd);
 
             //
             //  rbView
@@ -66,7 +67,8 @@ namespace Pedagoška_sveska.Forme
             rbView.Text = "Pregled";
             rbView.Location = new Point(425, 95 + rbAdd.Height);
             rbView.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            Controls.Add(rbView);
+            if (role == "admin")
+                Controls.Add(rbView);
 
             //
             //  lblIme
@@ -147,7 +149,7 @@ namespace Pedagoška_sveska.Forme
         }
         private void BtnOcene_Click(object sender, EventArgs e)
         {
-            if (rbView.Checked) 
+            if (rbView.Checked)
                 UpisPregled = "Pregled";
             if (rbAdd.Checked)
                 UpisPregled = "Upis";
@@ -161,11 +163,6 @@ namespace Pedagoška_sveska.Forme
                         PrikazAdmin prikazAdmin = new PrikazAdmin(lbPredmeti.SelectedItem.ToString(), "Ocene", predmet, UpisPregled);
                         prikazAdmin.ShowDialog();
                     }
-                    else if (role == "user")
-                    {
-                        PrikazUser prikazUser = new PrikazUser(lbPredmeti.SelectedItem.ToString(), "Ocene", username);
-                        prikazUser.ShowDialog();
-                    }
                 }
                 else if (lbPredmeti.SelectedIndex.ToString() == "-1")
                 {
@@ -174,18 +171,27 @@ namespace Pedagoška_sveska.Forme
                         PrikazAdmin prikazAdmin = new PrikazAdmin("", "Ocene", predmet, UpisPregled);
                         prikazAdmin.ShowDialog();
                     }
-                    else if (role == "user")
+                }
+            }
+            else if (UpisPregled == "")
+            {
+                if (role == "admin")
+                    MessageBox.Show("Izaberite sve opcije");
+                else
+                {
+                    if (lbPredmeti.SelectedIndex.ToString() != "-1")
+                    {
+                        PrikazUser prikazUser = new PrikazUser(lbPredmeti.SelectedItem.ToString(), "Ocene", username);
+                        prikazUser.ShowDialog();
+                    }
+                    else if (lbPredmeti.SelectedIndex.ToString() == "-1")
                     {
                         PrikazUser prikazUser = new PrikazUser("", "Ocene", username);
                         prikazUser.ShowDialog();
                     }
                 }
-                else return;
             }
-            else if (UpisPregled == "")
-                MessageBox.Show("Izaberite sve opcije");
         }
-
         private void BtnAktivnost_Click(object sender, EventArgs e)
         {
             if (rbView.Checked)
@@ -202,11 +208,6 @@ namespace Pedagoška_sveska.Forme
                     PrikazAdmin prikazAdmin = new PrikazAdmin(lbPredmeti.SelectedItem.ToString(), "Aktivnost", predmet, UpisPregled);
                     prikazAdmin.ShowDialog();
                 }
-                else if (role == "user")
-                {
-                    PrikazUser prikazUser = new PrikazUser(lbPredmeti.SelectedItem.ToString(), "Aktivnost", username);
-                    prikazUser.ShowDialog();
-                }
             }
             else if (lbPredmeti.SelectedIndex.ToString() == "-1")
             {
@@ -215,16 +216,27 @@ namespace Pedagoška_sveska.Forme
                     PrikazAdmin prikazAdmin = new PrikazAdmin("", "Aktivnost", predmet, UpisPregled);
                     prikazAdmin.ShowDialog();
                 }
-                else if (role == "user")
-                {
-                    PrikazUser prikazUser = new PrikazUser("", "Aktivnost", username);
-                    prikazUser.ShowDialog();
-                }
             }
             else return;
             }
             else if (UpisPregled == "")
-                MessageBox.Show("Izaberite sve opcije");
+            {
+                if (role == "admin")
+                    MessageBox.Show("Izaberite sve opcije");
+                else
+                {
+                    if (lbPredmeti.SelectedIndex.ToString() != "-1")
+                    {
+                        PrikazUser prikazUser = new PrikazUser(lbPredmeti.SelectedItem.ToString(), "Aktivnost", username);
+                        prikazUser.ShowDialog();
+                    }
+                    else if (lbPredmeti.SelectedIndex.ToString() == "-1")
+                    {
+                        PrikazUser prikazUser = new PrikazUser("", "Aktivnost", username);
+                        prikazUser.ShowDialog();
+                    }
+                }
+            }
         }
 
         private void Deselect_Click(object sender, EventArgs e)

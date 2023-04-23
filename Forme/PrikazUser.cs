@@ -69,38 +69,15 @@ namespace Pedagoška_sveska.Forme
             //
             //  dgvAktivnost  
             //
-            dgvAktivnost.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvAktivnost.ColumnCount = 3;
-            dgvAktivnost.Columns[0].Width = 200;
-            dgvAktivnost.Columns[1].Width = 90;
-            dgvAktivnost.Columns[2].Width = 99;
-            dgvAktivnost.Size = new Size(460, 250);
-            dgvAktivnost.Columns[0].Name = "Predmet";
+            dgvDizajn(dgvAktivnost);
             dgvAktivnost.Columns[1].Name = "Aktivnost";
-            dgvAktivnost.Columns[2].Name = "Datum";
-            dgvAktivnost.BorderStyle = BorderStyle.None;
-            dgvAktivnost.AutoResizeColumnHeadersHeight();
-            dgvAktivnost.BackColor = Color.FromArgb(241, 242, 243);
-            dgvAktivnost.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            dgvAktivnost.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
             pnlAktivnost.Controls.Add(dgvAktivnost);
 
             //
             //  dgvOcene
             //
-            dgvOcene.ColumnCount = 3;
-            dgvOcene.Columns[0].Width = 200;
-            dgvOcene.Columns[1].Width = 89;
-            dgvOcene.Columns[2].Width = 100;
-            dgvOcene.Size = new Size(460, 250);
-            dgvOcene.Columns[0].Name = "Predmet";
+            dgvDizajn(dgvOcene);
             dgvOcene.Columns[1].Name = "Ocene";
-            dgvOcene.Columns[2].Name = "Datum";
-            dgvOcene.BorderStyle = BorderStyle.None;
-            dgvOcene.AutoResizeColumnHeadersHeight();
-            dgvOcene.BackColor = Color.FromArgb(241, 242, 243);
-            dgvOcene.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            dgvOcene.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
             pnlOcene.Controls.Add(dgvOcene);
 
             //
@@ -128,7 +105,21 @@ namespace Pedagoška_sveska.Forme
             pnlAktivnost.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
             Controls.Add(pnlAktivnost);
         }
-
+        private void dgvDizajn(DataGridView dataGridView)
+        {
+            dataGridView.ColumnCount = 3;
+            dataGridView.Columns[0].Width = 200;
+            dataGridView.Columns[1].Width = 89;
+            dataGridView.Columns[2].Width = 100;
+            dataGridView.RowTemplate.Height = 30;
+            dataGridView.ColumnHeadersHeight = 30;
+            dataGridView.Columns[0].Name = "Predmet";
+            dataGridView.Columns[2].Name = "Datum";
+            dataGridView.BorderStyle = BorderStyle.None;
+            dataGridView.BackColor = Color.FromArgb(241, 242, 243);
+            dataGridView.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
+            dataGridView.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
+        }
         private void LoadData()
         {
             if (predmet == "")
@@ -149,7 +140,7 @@ namespace Pedagoška_sveska.Forme
                         dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
 
                     reader.Close();
-                    dataBase.conn.Open();
+                    dataBase.conn.Clone();
                 }
                 else if (prikaz == "Aktivnost")
                 {
