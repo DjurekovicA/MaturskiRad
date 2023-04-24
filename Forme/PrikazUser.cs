@@ -118,7 +118,7 @@ namespace Pedagoška_sveska.Forme
             dataGridView.BorderStyle = BorderStyle.None;
             dataGridView.BackColor = Color.FromArgb(241, 242, 243);
             dataGridView.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            dataGridView.Size = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
+            dataGridView.Size = new Size(ClientRectangle.Width - 40, 60);
         }
         private void LoadData()
         {

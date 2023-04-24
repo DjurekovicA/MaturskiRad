@@ -94,7 +94,6 @@ C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\MySql.Data.dll
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\WECPOFLogic.dll
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\WPFViewModelExternalControls.dll
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\System.Buffers.dll
-C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\Newtonsoft.Json.dll
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.csproj.AssemblyReference.cache
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška_sveska.Forme.HomePage.resources
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška_sveska.Forme.Login.resources
@@ -105,3 +104,4 @@ C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sves
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.csproj.CoreCompileInputs.cache
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.exe
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.pdb
+C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.csproj.CopyComplete
