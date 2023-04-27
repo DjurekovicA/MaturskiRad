@@ -49,25 +49,13 @@ namespace Pedagoška_sveska.Forme
             //
             //  Label
             //
-            Label.Text = "Login";
-            Label.ForeColor = Color.Black;
-            Label.Click += Evrithing_Click;
-            Label.Location = new Point(0, 0);
-            Label.Size = new Size((int)panel.Width, 60);
-            Label.TextAlign = ContentAlignment.MiddleCenter;
-            Label.Font = new Font("Times New Roman", 40F, FontStyle.Regular);
+            lblDizajn(Label, "Login");
             panel.Controls.Add(Label);
 
             //
             //  LabelUsername
             //
-            LabelUsername.Text = "Username";
-            LabelUsername.ForeColor = Color.Black;
-            LabelUsername.Click += Evrithing_Click;
-            LabelUsername.Location = new Point(0, 60);
-            LabelUsername.Size = new Size((int)panel.Width, 60);
-            LabelUsername.TextAlign = ContentAlignment.MiddleCenter;
-            LabelUsername.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
+            lblDizajn(LabelUsername, "Username");
             panel.Controls.Add(LabelUsername);
 
             //
@@ -85,13 +73,7 @@ namespace Pedagoška_sveska.Forme
             //
             //  LabelPassword
             //
-            LabelPassword.Text = "Password";
-            LabelPassword.ForeColor = Color.Black;
-            LabelPassword.Click += Evrithing_Click;
-            LabelPassword.Location = new Point(0, 170);
-            LabelPassword.Size = new Size((int)panel.Width, 60);
-            LabelPassword.TextAlign = ContentAlignment.MiddleCenter;
-            LabelPassword.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
+            lblDizajn(LabelPassword, "Password");
             panel.Controls.Add(LabelPassword);
 
             //
@@ -107,7 +89,7 @@ namespace Pedagoška_sveska.Forme
             panel.Controls.Add(Password);
 
             //
-            //  Enter
+            //  btnEnter
             //
             btnEnter.Text = "Login";
             btnEnter.ForeColor = Color.Black;
@@ -117,7 +99,29 @@ namespace Pedagoška_sveska.Forme
             btnEnter.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(btnEnter);
         }
-
+        private void lblDizajn(Label label, string element)
+        {
+            label.ForeColor = Color.Black;
+            label.Click += Evrithing_Click;
+            label.Size = new Size((int)panel.Width, 60);
+            label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
+            if (element == "Login")
+            {
+                label.Text = "Login";
+                label.Location = new Point(0, 0);
+            }
+            else if (element == "Username")
+            {
+                label.Text = "Username";
+                label.Location = new Point(0, 60);
+            }
+            else if (element == "Password")
+            {
+                label.Text = "Password";
+                label.Location = new Point(0, 170);
+            }
+        }
         private void BtnEnter_Click(object sender, EventArgs e)
         {
             string[] user = new string[100];
@@ -168,7 +172,6 @@ namespace Pedagoška_sveska.Forme
                 }
             }
         }
-
         private string Predmet(string username)
         {
             string id = "";
@@ -207,7 +210,6 @@ namespace Pedagoška_sveska.Forme
                 Username.ForeColor = Color.LightGray;
             }
         }
-
         private void Evrithing_Click(object sender, EventArgs e)
         {
             if (Username.Text == "")
@@ -218,7 +220,6 @@ namespace Pedagoška_sveska.Forme
                 panel.Focus();
                 return;
         }
-
         private void Username_Click(object sender, EventArgs e)
         {
             if (Username.Text == "Unesite ime")
