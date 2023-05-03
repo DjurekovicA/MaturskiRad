@@ -24,7 +24,7 @@ namespace Pedagoška_sveska.Forme
 
         public Login()
         {
-            Dizajn();
+            Dizajn();   
         }
         private void Dizajn()
         {

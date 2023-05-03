@@ -617,15 +617,17 @@ namespace Pedagoška_sveska.Forme
                     cmd.CommandText = query;
                     adapter.Fill(dt);
                     dataBase.conn.Close();
+
+                    dgvAktivnostIzabranUpis.Rows.Clear();
+                    dgvDizajn(dgvAktivnostIzabranUpis, 0);
+                    dgvAktivnostIzabranUpis.Height += 8;
+                    Znak = "";
+                    lblDatum.Text = "";
+                    btnPlusIzabran.ForeColor = Color.Black;
+                    btnPlusIzabran.BackColor = Color.Transparent;
+                    btnMinusIzabran.ForeColor = Color.Black;
+                    btnMinusIzabran.BackColor = Color.Transparent;
                 }
-                pnlUpisAktivnostIzabran.Controls.Remove(dgvAktivnostIzabranUpis);
-                dodajDGV(pnlUpisAktivnostIzabran, dgvAktivnostIzabranUpis, 0);
-                Znak = "";
-                lblDatum.Text = "";
-                btnPlusIzabran.ForeColor = Color.Black;
-                btnPlusIzabran.BackColor = Color.Transparent;
-                btnMinusIzabran.ForeColor = Color.Black;
-                btnMinusIzabran.BackColor = Color.Transparent;
             }
             else if (panel == 4)
             {
@@ -641,15 +643,19 @@ namespace Pedagoška_sveska.Forme
                     cmd.CommandText = query;
                     adapter.Fill(dt);
                     dataBase.conn.Close();
+
+                    dgvOceneIzabranUpis.Rows.Clear();
+                    dgvDizajn(dgvOceneIzabranUpis, 0);
+                    dgvOceneIzabranUpis.Height += 8;
+                    lblDatum.Text = "";
+                    cbOceneIzabran.SelectedItem = 0;
+                    if (dgvOceneIzabranUpis.Height >= 250)
+                        dgvOceneIzabranUpis.Width = 229;
                 }
-                pnlUpisOceneIzabran.Controls.Remove(dgvOceneIzabranUpis);
-                dodajDGV(pnlUpisOceneIzabran, dgvOceneIzabranUpis, 0);
-                lblDatum.Text = "";
-                cbOceneIzabran.SelectedItem = 0;
             }
             else if (panel == 7)
             {
-                if (Znak != "" && (string) lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
+                if (Znak != "" && (string)lbUceniciAktivnost.SelectedItem != "" && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
                     dataBase.conn.Open();
@@ -671,7 +677,7 @@ namespace Pedagoška_sveska.Forme
             }
             else if (panel == 8)
             {
-                if (cbOcene.SelectedIndex != -1 && (string) lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
+                if (cbOcene.SelectedIndex != -1 && (string)lbUceniciOcene.SelectedItem != "" && lblDatum.Text != "")
                 {
                     var dataBase = new DataBase();
                     dataBase.conn.Open();
@@ -796,7 +802,7 @@ namespace Pedagoška_sveska.Forme
                     if (dgvOceneIzabranUpis.Height < 210)
                         dgvOceneIzabranUpis.Height += 30;
                 }
-                if (dgvOceneIzabranUpis.Height >= 210)
+                if (dgvOceneIzabranUpis.Height >= 220)
                     dgvOceneIzabranUpis.Width += 17;
                 reader.Close();
                 dataBase.conn.Close();
