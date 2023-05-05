@@ -779,7 +779,7 @@ namespace Pedagoška_sveska.Forme
                     if (dgvAktivnostIzabranUpis.Height < 210)
                         dgvAktivnostIzabranUpis.Height += 30;
                 }
-                if (dgvAktivnostIzabranUpis.Height < 210)
+                if (dgvAktivnostIzabranUpis.Height > 220)
                 {
                     dgvAktivnostIzabranUpis.Width += 17;
                     dgvAktivnostIzabranUpis.Location = new Point(0, 10);

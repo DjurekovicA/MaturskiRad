@@ -98,6 +98,7 @@ namespace Pedagoška_sveska.Forme
             btnEnter.Location = new Point(75, 290);
             btnEnter.Font = new Font("Times New Roman", 20F, FontStyle.Regular);
             panel.Controls.Add(btnEnter);
+
         }
         private void lblDizajn(Label label, string element)
         {
