@@ -144,13 +144,13 @@ namespace Pedagoška_sveska.Forme
             reader.Close();
             dataBase.conn.Close();
 
-            foreach (string u in user)
+            foreach (string username in user)
             {
-                if (Username.Text == u)
+                if (Username.Text == username)
                 {
                     var dataBase1 = new DataBase();
                     dataBase1.conn.Open();
-                    query = "SELECT * FROM `korisnik` WHERE `Username` = '" + u + "'";
+                    query = "SELECT * FROM `korisnik` WHERE `Username` = '" + username + "'";
                     MySqlCommand mySqlCommand = new MySqlCommand(query, dataBase1.conn); 
                     MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
                     mySqlDataAdapter.SelectCommand = mySqlCommand;
@@ -161,7 +161,7 @@ namespace Pedagoška_sveska.Forme
                     {
                         if(Password.Text == mySqlDataReader.GetString("Password"))
                         {
-                            string predmet = Predmet(u);
+                            string predmet = Predmet(username);
                             HomePage page = new HomePage(Username.Text, mySqlDataReader.GetString("Role"), predmet, this);
                             dataBase1.conn.Close();
                             page.Show();
