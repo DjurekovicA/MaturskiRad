@@ -109,7 +109,7 @@ namespace Pedagoška_sveska.Forme
         {
             dataGridView.ColumnCount = 3;
             dataGridView.Columns[0].Width = 200;
-            dataGridView.Columns[1].Width = 89;
+            dataGridView.Columns[1].Width = 72;
             dataGridView.Columns[2].Width = 100;
             dataGridView.RowTemplate.Height = 30;
             dataGridView.ColumnHeadersHeight = 30;
@@ -118,7 +118,8 @@ namespace Pedagoška_sveska.Forme
             dataGridView.BorderStyle = BorderStyle.None;
             dataGridView.BackColor = Color.FromArgb(241, 242, 243);
             dataGridView.Font = new Font("Times New Roman", 15F, FontStyle.Regular);
-            dataGridView.Size = new Size(ClientRectangle.Width - 40, 60);
+            dataGridView.MaximumSize = new Size(ClientRectangle.Width - 40, ClientRectangle.Height - 80);
+            dataGridView.Size = new Size(ClientRectangle.Width - 57, 60);
         }
         private void LoadData()
         {
@@ -127,7 +128,7 @@ namespace Pedagoška_sveska.Forme
                 lblIme.Text = korisnik;
                 if (prikaz == "Ocene")
                 {
-                    var dataBase = new DataBase();
+                    var dataBase= new DataBase();
                     string query = "SELECT `Ocena`,`Predmet`, `Datum` FROM `ocene` WHERE `Ucenik`= '" + korisnik + "'";
                     dataBase.conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, dataBase.conn);
@@ -137,7 +138,13 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
+                    {
                         dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
+                        if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
+                            dgvOcene.Height += 30;
+                    }
+                    if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
+                        dgvOcene.Width += 17;
 
                     reader.Close();
                     dataBase.conn.Clone();
@@ -154,7 +161,13 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
+                    {
                         dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                        if (dgvAktivnost.Height < dgvAktivnost.MaximumSize.Height)
+                            dgvAktivnost.Height += 30;
+                    }
+                    if (dgvAktivnost.Height >= dgvAktivnost.MaximumSize.Height)
+                        dgvAktivnost.Width += 17;
 
                     reader.Close();
                     dataBase.conn.Clone();
@@ -174,7 +187,13 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
+                    {
                         dgvOcene.Rows.Add(reader.GetString("Predmet"), reader.GetString("Ocena"), reader.GetString("Datum"));
+                        if (dgvOcene.Height < dgvOcene.MaximumSize.Height)
+                            dgvOcene.Height += 30;
+                    }
+                    if (dgvOcene.Height >= dgvOcene.MaximumSize.Height)
+                        dgvOcene.Width += 17;
 
                     reader.Close();
                     dataBase.conn.Close();
@@ -191,7 +210,13 @@ namespace Pedagoška_sveska.Forme
                     adapter.Fill(dt);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
+                    {
                         dgvAktivnost.Rows.Add(reader.GetString("Predmet"), reader.GetString("Aktivnost"), reader.GetString("Datum"));
+                        if (dgvAktivnost.Height < dgvAktivnost.MaximumSize.Height)
+                            dgvAktivnost.Height += 30;
+                    }
+                    if (dgvAktivnost.Height >= dgvAktivnost.MaximumSize.Height)
+                        dgvAktivnost.Width += 17;
 
                     reader.Close();
                     dataBase.conn.Close();

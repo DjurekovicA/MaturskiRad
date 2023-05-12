@@ -104,3 +104,4 @@ C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sves
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.csproj.CoreCompileInputs.cache
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.exe
 C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\obj\Debug\Pedagoška sveska.pdb
+C:\Users\adjurekovic\Desktop\Visual Studio\MaturskiRad\bin\Debug\Newtonsoft.Json.dll
