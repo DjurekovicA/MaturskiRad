@@ -153,7 +153,6 @@ namespace Pedagoška_sveska.Forme
                 UpisPregled = "Pregled";
             if (rbAdd.Checked)
                 UpisPregled = "Upis";
-
             if (UpisPregled != "")
             {
                 if (lbPredmeti.SelectedIndex.ToString() != "-1")
